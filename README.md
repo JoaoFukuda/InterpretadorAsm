@@ -1,4 +1,4 @@
 # InterpretadorAsm
 
 # Contribuintes
-* [João Fukuda](www.git.com/JoaoFukuda)
+* [João Fukuda](https://www.git.com/JoaoFukuda)
