@@ -1,4 +1,4 @@
-package grafico;
+package src.grafico;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

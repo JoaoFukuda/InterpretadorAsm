@@ -1,4 +1,6 @@
-import grafico.*;
+package src;
+
+import src.grafico.*;
 
 class Main
 {
