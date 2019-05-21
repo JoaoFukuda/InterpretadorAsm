@@ -16,14 +16,14 @@ public class MainFrame
 
 	public MainFrame()
 	{
-		f = new JFrame("A JFrame");
+		f = new JFrame("Janela-teste");
 		f.setSize(250, 250);
 		f.setLocation(300,200);
 
 		textArea = new JTextArea(10, 40);
 		f.getContentPane().add(BorderLayout.CENTER, textArea);
 		
-		button = new JButton("Click Me");
+		button = new JButton("Hit me senpai");
 		f.getContentPane().add(BorderLayout.SOUTH, button);
 
 		button.addActionListener(new ActionListener()
@@ -31,7 +31,7 @@ public class MainFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				textArea.append("Button was clicked\n");
+				textArea.append("Nyan!\n");
 
 			}
 		});
