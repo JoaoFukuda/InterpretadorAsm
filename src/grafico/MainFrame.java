@@ -16,6 +16,7 @@ public class MainFrame
 
 	public MainFrame()
 	{
+		System.out.println("janela criada com sucesso!!!");
 		f = new JFrame("Janela-teste");
 		f.setSize(250, 250);
 		f.setLocation(300,200);
