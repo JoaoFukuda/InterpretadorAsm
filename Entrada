@@ -1,0 +1,86 @@
+import java.util.Scanner;
+import java.util.jar.Pack200;
+
+public class Entrada{
+    
+
+    static void traduzIssu(String op , String p1, String p2){
+       
+        
+
+        boolean ehConstante= true;
+        boolean ehConstante2= true;
+       try{
+        int foi = Integer.parseInt(p1);			
+        System.out.println(foi);
+       }
+       catch(NumberFormatException foi){
+            ehConstante=false;
+       }
+       System.out.println("p1 eh constante?"+ ehConstante);
+/*__________________________________________________________________ */
+       try{
+        int foi2 = Integer.parseInt(p2);			
+        System.out.println(foi2);
+       }
+       catch(NumberFormatException foi2){
+            ehConstante2=false;
+       }
+       System.out.println("p2 eh constante?"+ ehConstante2);
+/*________________________________________________________________ */
+// faltou um try catch para verificar se eh registrador
+
+       String opCode="";
+      
+       
+String tipo = "MOV";
+ 
+boolean oper= op.equals(tipo);
+           if (oper==true && ehConstante==false && ehConstante2==true){ //MOV [const], const
+            opCode="000011"; // opCode do drive
+            System.out.println(opCode);
+           }
+         
+       }
+    
+    static void separaIssu(String c){
+        char [] comando = c.toCharArray();
+        String operacao="";
+        String p1="";
+        String p2="";
+        
+         for (int op=0;op<3;op++){ /* nesse for op pega 3 chars, esqueci do je, jl... que têm 2 chars,
+             nesse caso, teria muito problema guardar um espaço no final*/
+            operacao+=comando[op]; 
+         }
+         System.out.println("Operacao:"+operacao);
+        int i=4;
+        while (comando[i]!=','){
+            p1+=comando[i];
+            i++;
+         }
+         for (int y= i+1; y<comando.length;y++){
+            p2+=comando[y];
+         }
+         
+         System.out.println("parametro1:"+ p1);
+         System.out.println("parametro2:"+p2);
+         traduzIssu(operacao,p1,p2);
+
+    }
+    
+    public static void main(String [] args){
+        
+        Scanner sc = new Scanner(System.in);
+        Scanner i = new Scanner(System.in);
+        System.out.print("Quantas linhas tem o código?");
+        int it= i.nextInt();
+        System.out.print("Digite o codigo:");
+        for (int j=0;j < it ;j++){
+            String x= sc.nextLine(); 
+          separaIssu(x);
+        }
+        sc.close();
+        i.close();
+    }
+}
