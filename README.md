@@ -8,3 +8,5 @@ Trabalho da matéria de Organização de Computadores digitais no curso de Siste
 * [Lenkiro](https://www.git.com/Lenkiro)
 * [15483114](https://www.git.com/15483114)
 
+This is my Legacy - Lenki
+
