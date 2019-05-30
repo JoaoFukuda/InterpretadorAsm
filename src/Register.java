@@ -1,17 +1,17 @@
-package Registrador;
+package src;
 public class Register{
     private int data;
-    private int opcode;
-    public Register(int data, int opcode){
+    private int doorNumber;
+    public Register(int data, int doorNumber){
         this.data = data;
-        this.opcode = opcode;
+        this.doorNumber = doorNumber;
     }
     public int getData(){
         return this.data;
     }
 
-    public int getOpcode(){
-        return this.opcode;
+    public int getdoorNumber(){
+        return this.doorNumber;
     }
 
     public void setData(int data){
