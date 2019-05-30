@@ -1,41 +1,22 @@
+// Contém a janela principal do programa
 package src.grafico;
+
+import src.cpn.*;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 
 public class MainFrame
 {
 	private JFrame f;
-	private JTextArea textArea;
-	private JButton button;
 
 	public MainFrame()
 	{
-		System.out.println("janela criada com sucesso!!!");
-		f = new JFrame("Janela-teste");
+		f = new JFrame("Interpretador Assembly");
 		f.setSize(250, 250);
-		f.setLocation(300,200);
-
-		textArea = new JTextArea(10, 40);
-		f.getContentPane().add(BorderLayout.CENTER, textArea);
-		
-		button = new JButton("Hit me senpai");
-		f.getContentPane().add(BorderLayout.SOUTH, button);
-
-		button.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				textArea.append("Nyan!\n");
-
-			}
-		});
 
 		f.setVisible(true);
 	}
