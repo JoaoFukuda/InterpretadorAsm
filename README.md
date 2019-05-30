@@ -5,7 +5,7 @@ Trabalho da matéria de Organização de Computadores digitais no curso de Siste
 ## Arquitetura
 
 A arquitetura que vai ser implementada é baseada no 8086:
-![image](https://user-images.githubusercontent.com/37672942/58654990-7d26cc00-82ef-11e9-9ed6-25c470cb4173.png "Arquitetura planejada")
+![image](https://user-images.githubusercontent.com/37672942/58655907-a21c3e80-82f1-11e9-85ba-7770c2641acd.png "Arquitetura planejada (foto atualizada)")
 
 ## Contribuintes
 
