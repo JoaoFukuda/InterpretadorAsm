@@ -2,19 +2,22 @@ package src;
 
 public class Register{
     private int data;
-    private int doorNumber;
+    private int doorIN, doorOUT;
 
-    public Register(int data, int doorNumber){
-        this.data = data;
-        this.doorNumber = doorNumber;
+    public Register(int doorIN, int doorOUT){
+        data = 0;
+        this.doorIN = doorIN;
+        this.doorOUT = doorOUT;
     }
     
     public int getData(){
         return this.data;
     }
-
-    public int getdoorNumber(){
-        return this.doorNumber;
+    public int getDoorIN(){
+        return this.doorIN;
+    }
+    public int getDoorOUT(){
+        return this.doorOUT;
     }
 
     public void setData(int data){
