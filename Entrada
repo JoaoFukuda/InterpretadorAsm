@@ -4,21 +4,46 @@ import java.util.jar.Pack200;
 public class Entrada{
     
 
-    static void traduzIssu(String op , String p1, String p2){
-       
-        
+    static String seeInsideAddress(String shell){
+        char [] casca = shell.toCharArray();
+        String semCasca="";
+        for (int i=1; i<casca.length -1;i++){
+            semCasca +=casca[i];
+        }
+        return semCasca;
+    }
 
-        boolean ehConstante= true;
-        boolean ehConstante2= true;
-       try{
-        int foi = Integer.parseInt(p1);			
-        System.out.println(foi);
+    static String traduzIssu(String op , String p1, String p2){
+   /*
+   p1 pode ser registrador ou endereco. Aparentemente p1 nunca serah uma constante, putz, tem o compare, lembrei disso enquanto coloco no git. vejo isso depois
+   p2 pode ser constante, registrador ou endereco
+   */
+                
+boolean endereco= true; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
+boolean registrador= false;
+String a= "AX";       
+       if (p1.equals(a)){
+           registrador = true;
+           endereco=false;
        }
-       catch(NumberFormatException foi){
-            ehConstante=false;
+       String b= "BX";       
+       if (p1.equals(b)){
+           registrador = true;
+           endereco=false;
        }
-       System.out.println("p1 eh constante?"+ ehConstante);
+       String c= "CX";       
+       if (p1.equals(c)){
+           registrador = true;
+           endereco=false;
+       }
+       String d= "DX";       
+       if (p1.equals(d)){
+           registrador = true;
+           endereco=false;
+       }
 /*__________________________________________________________________ */
+// aqui verifica se eh constante
+boolean ehConstante2= true;
        try{
         int foi2 = Integer.parseInt(p2);			
         System.out.println(foi2);
@@ -26,21 +51,58 @@ public class Entrada{
        catch(NumberFormatException foi2){
             ehConstante2=false;
        }
-       System.out.println("p2 eh constante?"+ ehConstante2);
+       
 /*________________________________________________________________ */
-// faltou um try catch para verificar se eh registrador
+
+boolean registrador2= false;
+boolean endereco2= true;
+    
+       if (p2.equals(a)){
+           registrador2 = true;
+           endereco2= false;
+       }
+       
+       if (p2.equals(b)){
+           registrador2 = true;
+           endereco2= false;
+       }
+    
+       if (p2.equals(c)){
+           registrador2 = true;
+           endereco2= false;
+       }
+           
+       if (p2.equals(d)){
+           registrador2 = true;
+           endereco2= false;
+       }
+/* ______________________________________________________________________________________*/
 
        String opCode="";
-      
-       
-String tipo = "MOV";
- 
-boolean oper= op.equals(tipo);
-           if (oper==true && ehConstante==false && ehConstante2==true){ //MOV [const], const
-            opCode="000011"; // opCode do drive
-            System.out.println(opCode);
+      String m="MOV";
+       if (op.equals(m)){
+           
+           if (registrador && registrador2){ // MOV R1,R2
+                opCode= "011010";
            }
-         
+           if (registrador && ehConstante2){ //MOV R1, const
+            opCode= "000000";
+           }
+           if(endereco && registrador2){ // MOV [R1], R2   opCode= "000001"; // MOV [const], R1  opCode="000100";
+               System.out.println("dentro do parametro1:"+seeInsideAddress(p1)); 
+           }
+           if(endereco && ehConstante2){ // MOV [R1],constante opCode="000010";  //MOV [constante],constante opCode="000011";
+
+           }
+           
+           if (registrador && endereco2){ // MOV R1, [const]   opCode="000101";     //MOV R1,[R2]  opCode="000110";
+               
+           }
+           
+           
+       }
+          
+         return opCode;
        }
     
     static void separaIssu(String c){
@@ -65,7 +127,7 @@ boolean oper= op.equals(tipo);
          
          System.out.println("parametro1:"+ p1);
          System.out.println("parametro2:"+p2);
-         traduzIssu(operacao,p1,p2);
+         System.out.println(traduzIssu(operacao,p1,p2));
 
     }
     
@@ -79,6 +141,7 @@ boolean oper= op.equals(tipo);
         for (int j=0;j < it ;j++){
             String x= sc.nextLine(); 
           separaIssu(x);
+          // acho que aqui poderiamos chamar a memoria e já guardar as constantes e endereços nela. também acho que o IR pode pegar o opconde de uma vez 
         }
         sc.close();
         i.close();
