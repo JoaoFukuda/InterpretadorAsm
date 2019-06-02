@@ -14,119 +14,274 @@ public class Entrada{
     }
 
     static String traduzIssu(String op , String p1, String p2){
-   /*
-   p1 pode ser registrador ou endereco. Aparentemente p1 nunca serah uma constante, putz, tem o compare, lembrei disso enquanto coloco no git. vejo isso depois
-   p2 pode ser constante, registrador ou endereco
-   */
+        /*Aparentemente p1 nunca serah uma constante*/
+                     
+         
+     
+     boolean endereco= true; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
+     boolean registrador= false;
+     boolean regEndereco= false; // verifica se eh registrador de endereco
+     
+     String ar= "[AX]";       
+            if (p1.equals(ar)){
+                regEndereco = true;
+                endereco=false;
+            }
+            String br= "[BX]";       
+            if (p1.equals(br)){
+                regEndereco = true;
+                endereco=false;
+            }
+            String cr= "[CX]";       
+            if (p1.equals(cr)){
+                regEndereco = true;
+                endereco=false;
+            }
+            String dr= "[DX]";       
+            if (p1.equals(dr)){
+                regEndereco = true;
+                endereco=false;
+            }
+     
+     String a= "AX";       
+            if (p1.equals(a)){
+                registrador = true;
+                endereco=false;
+            }
+            String b= "BX";       
+            if (p1.equals(b)){
+                registrador = true;
+                endereco=false;
+            }
+            String c= "CX";       
+            if (p1.equals(c)){
+                registrador = true;
+                endereco=false;
+            }
+            String d= "DX";       
+            if (p1.equals(d)){
+                registrador = true;
+                endereco=false;
+            }
+     /*__________________________________________________________________ */
+     // aqui verifica se eh constante
+     boolean ehConstante2= true;
+            try{
+             int foi2 = Integer.parseInt(p2);			
+             System.out.println(foi2);
+            }
+            catch(NumberFormatException foi2){
+                 ehConstante2=false;
+            }
+            
+     /*________________________________________________________________ */
+     
+     boolean regEndereco2= false; // verifica se eh registrador de endereco
+     boolean registrador2= false;
+     boolean endereco2= true;
+         
+        
+            if (p2.equals(ar)){
+                regEndereco2 = true;
+                endereco2=false;
+            }
+                   
+            if (p2.equals(br)){
+                regEndereco2 = true;
+                endereco2=false;
+            }
+                   
+            if (p2.equals(cr)){
+                regEndereco2 = true;
+                endereco2=false;
+            }
+                   
+            if (p2.equals(dr)){
+                regEndereco2 = true;
+                endereco2 =false;
+            }
+     
+     
+            if (p2.equals(a)){
+                registrador2 = true;
+                endereco2= false;
+            }
+            
+            if (p2.equals(b)){
+                registrador2 = true;
+                endereco2= false;
+            }
+         
+            if (p2.equals(c)){
+                registrador2 = true;
+                endereco2= false;
+            }
                 
-boolean endereco= true; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
-boolean registrador= false;
-String a= "AX";       
-       if (p1.equals(a)){
-           registrador = true;
-           endereco=false;
-       }
-       String b= "BX";       
-       if (p1.equals(b)){
-           registrador = true;
-           endereco=false;
-       }
-       String c= "CX";       
-       if (p1.equals(c)){
-           registrador = true;
-           endereco=false;
-       }
-       String d= "DX";       
-       if (p1.equals(d)){
-           registrador = true;
-           endereco=false;
-       }
-/*__________________________________________________________________ */
-// aqui verifica se eh constante
-boolean ehConstante2= true;
-       try{
-        int foi2 = Integer.parseInt(p2);			
-        System.out.println(foi2);
-       }
-       catch(NumberFormatException foi2){
-            ehConstante2=false;
-       }
-       
-/*________________________________________________________________ */
+            if (p2.equals(d)){
+                registrador2 = true;
+                endereco2= false;
+            }
+     /* ______________________________________________________________________________________*/
+     
+         String opCode="";
+           String m="MOV";
+           String ad= "ADD";
+           String s ="SUB";
+           String mu="MUL";
+           String dv="DIV";
+            if (op.equals(m)){
+                if(registrador){	//MOV R1, const
+                    opCode="000000";
+                } 
+                if(regEndereco && registrador2){ //	MOV [R1], R2
+                    opCode="000001";
+                }
 
-boolean registrador2= false;
-boolean endereco2= true;
-    
-       if (p2.equals(a)){
-           registrador2 = true;
-           endereco2= false;
-       }
-       
-       if (p2.equals(b)){
-           registrador2 = true;
-           endereco2= false;
-       }
-    
-       if (p2.equals(c)){
-           registrador2 = true;
-           endereco2= false;
-       }
-           
-       if (p2.equals(d)){
-           registrador2 = true;
-           endereco2= false;
-       }
-/* ______________________________________________________________________________________*/
+                if(regEndereco && ehConstante2){ //	MOV [R1], const
+                    opCode="000010";
+                }
+                if(endereco && ehConstante2){   //		MOV [const], const
+                    opCode="000011";
+                }
 
-       String opCode="";
-      String m="MOV";
-       if (op.equals(m)){
-           
-           if (registrador && registrador2){ // MOV R1,R2
-                opCode= "011010";
-           }
-           if (registrador && ehConstante2){ //MOV R1, const
-            opCode= "000000";
-           }
-           if(endereco && registrador2){ // MOV [R1], R2   opCode= "000001"; // MOV [const], R1  opCode="000100";
-               System.out.println("dentro do parametro1:"+seeInsideAddress(p1)); 
-           }
-           if(endereco && ehConstante2){ // MOV [R1],constante opCode="000010";  //MOV [constante],constante opCode="000011";
+                if(endereco && registrador2){   //	MOV [const], R1
+                    opCode="000100";
+                }
+                if(registrador && endereco2){   //	MOV R1, [const]
+                    opCode="000101";
+                }
+                if(registrador && regEndereco2){   //		MOV R1,[R2]
+                    opCode="000110";
+                }
+                if(registrador && registrador2){   //		MOV R1, R2
+                    opCode="011001";
+                }
 
-           }
-           
-           if (registrador && endereco2){ // MOV R1, [const]   opCode="000101";     //MOV R1,[R2]  opCode="000110";
-               
-           }
-           
-           
-       }
-          
-         return opCode;
-       }
+            }
+
+            if (op.equals(ad)){
+                if(registrador && registrador2){   //		ADD R1, R2
+                    opCode="000111";
+                }
+                if(registrador && ehConstante2){   //	ADD R1, constante
+                    opCode="001000";
+                }
+            }
+
+            if (op.equals(s)){
+                if(registrador && registrador2){   //	SUB R1, R2
+                    opCode="001001";
+                }
+                if(registrador && ehConstante2){   //	SUB R1, constante
+                    opCode="001010";
+                }
+            }
+
+            if (op.equals(mu)){
+                if(registrador && registrador2){   //		MUL R1, R2
+                    opCode="001011";
+                }
+                if(registrador && ehConstante2){   //	 	MUL R1, constante
+                    opCode="001100";
+                }
+            }
+
+            if (op.equals(dv)){
+                if(registrador && registrador2){   //			DIV R1, R2
+                   		
+                    opCode="001101";
+                }
+                if(registrador && ehConstante2){   //	 	DIV R1, constante
+                    opCode="001110";
+                }
+            }
+
+            		
+
+            if (op.equals(d)){
+                if(registrador && registrador2){   //			MOD R1, R2
+                   		
+                    opCode="001111";
+                }
+                if(registrador && ehConstante2){   //	 		MOD R1,constante
+                    opCode="010000";
+                }
+            }   
+
+            	// estou com problemas nesse por enquanto porque nao tem parametro 2            
+            
+            String jmp="JMP";
+            if (op.equals(jmp)){
+                opCode="010001";
+            }
+            String jne="JNE";
+            if (op.equals(jne)){
+                opCode="010011";
+            }
+            String je="JE";
+            if (op.equals(je)){
+                opCode="010010";
+            }
+            String jg="JG";
+            if (op.equals(jg)){
+                opCode="010100";
+            }
+            String jge="JGE";
+            if (op.equals(jge)){
+                opCode="010101";
+            }
+            String jl="JL";
+            if (op.equals(jl)){
+                opCode="010110";
+            }
+            String jle="JLE";
+            if (op.equals(jle)){
+                opCode="010111";
+            }
+            String cmp="CMP";
+            if (op.equals(cmp)){
+                opCode="011000";
+            }
+
+              return opCode;
+            }
+         
     
     static void separaIssu(String c){
         char [] comando = c.toCharArray();
         String operacao="";
         String p1="";
         String p2="";
-        
-         for (int op=0;op<3;op++){ /* nesse for op pega 3 chars, esqueci do je, jl... que têm 2 chars,
-             nesse caso, teria muito problema guardar um espaço no final*/
+        /*
+        if (operacao.equals("JE")|| operacao.equals("JG")|| operacao.equals("JL")){
+            for (int op=0;op<2;op++){ 
+               operacao+=comando[op]; 
+            }
+            for (int y= 3; y<comando.length;y++){
+                p1+=comando[y];
+             }
+        }*/
+
+         for (int op=0;op<3;op++){ 
             operacao+=comando[op]; 
          }
-         System.out.println("Operacao:"+operacao);
+
         int i=4;
+       if (operacao.equals("CMP") || operacao.equals("JLE") ||  operacao.equals("JGE") ||operacao.equals("JMP") ||operacao.equals("JNE") ){
+        for (int y= i; y<comando.length;y++){
+            p1+=comando[y];
+         }
+       }else{
         while (comando[i]!=','){
             p1+=comando[i];
             i++;
          }
-         for (int y= i+1; y<comando.length;y++){
-            p2+=comando[y];
-         }
          
-         System.out.println("parametro1:"+ p1);
-         System.out.println("parametro2:"+p2);
+            for (int y= i+1; y<comando.length;y++){
+                p2+=comando[y];
+             }
+            }
+        
          System.out.println(traduzIssu(operacao,p1,p2));
 
     }
@@ -141,7 +296,7 @@ boolean endereco2= true;
         for (int j=0;j < it ;j++){
             String x= sc.nextLine(); 
           separaIssu(x);
-          // acho que aqui poderiamos chamar a memoria e já guardar as constantes e endereços nela. também acho que o IR pode pegar o opconde de uma vez 
+          // acho que aqui poderiamos chamar a memoria e já guradar o opcode nela.
         }
         sc.close();
         i.close();
