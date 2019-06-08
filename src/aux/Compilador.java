@@ -3,5 +3,5 @@
 package src.aux;
 
 public class Compilador {
-    static compilar() {}
+    static void compilar() {}
 }

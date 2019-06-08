@@ -1,17 +1,30 @@
 // Contém a janela principal do programa
 package src.grafico;
 
-import src.cpn.*;
+import java.util.Scanner;
 
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 
 public class MainFrame extends JFrame implements ActionListener {
-	JMenuBar mb;
+
+	private int window_width = 500, window_height = 500,
+	first_width = window_width/2;
+
+	JMenuBar menuBar;
 	JMenu file;
 	JMenuItem open;
-	JTextArea ta;
+	JTextArea codeText;
+	JTextField[] registers = new JTextField[6];
+	JLabel[] registerLabels = {
+		new JLabel("ax"),
+		new JLabel("bx"),
+		new JLabel("cx"),
+		new JLabel("dx"),
+		new JLabel("pc"),
+		new JLabel("ir")
+	};
 
 	private void Init() {
 		open = new JMenuItem("Abrir arquivo");
@@ -20,46 +33,64 @@ public class MainFrame extends JFrame implements ActionListener {
 		file = new JMenu("Arquivo");
 		file.add(open);
 
-		mb = new JMenuBar();
-		mb.setBounds(0,0,800,20);
-		mb.add(file);
+		menuBar = new JMenuBar();
+		menuBar.setBounds(0,0,window_width,20);
+		menuBar.add(file);
 
-		ta = new JTextArea(800,800);
-		ta.setBounds(0,20,800,800);
+		codeText = new JTextArea();
+		codeText.setBounds(10, 30, (first_width) - 20, window_height - 80);
 
-		add(mb);
-		add(ta);
+		int offsetX = 10,
+		offsetY = 30;
+		for(int n = 0; n < registers.length; n++) {
+			registers[n] = new JTextField("00");
+
+			int offset_width = (n%2) * (window_width - first_width)/2 + offsetX + first_width,
+			offset_height = (40 * (n/2)) + offsetY;
+			
+			registerLabels[n].setBounds(offset_width, offset_height, 25, 20);
+			registers[n].setBounds(offset_width + 25, offset_height, 25, 20);
+
+			add(registerLabels[n]);
+			add(registers[n]);
+		}
+
+		add(menuBar);
+		add(codeText);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == open) {
 			JFileChooser fc = new JFileChooser();
 			int i = fc.showOpenDialog(this);
-
+			
+			
 			if(i == JFileChooser.APPROVE_OPTION) {
 				File f = fc.getSelectedFile();
-				String filepath = f.getPath();
+
+				String code = "";
 				try {
-					BufferedReader br = new BufferedReader(new FileReader(filepath));
-					String s1 = "",s2 = "";
-					while((s1 = br.readLine()) != null) {
-						s2 += s1 + "\n";
+					Scanner in = new Scanner(f);
+	
+					while(in.hasNextLine()) {
+						code += in.nextLine() + "\n";
 					}
-					ta.setText(s2);
-					br.close();
+
+					in.close();
 				}catch (Exception ex) {
-					ex.printStackTrace();
+					code = "O arquivo não foi encontrado!";
 				}
+
+				codeText.setText(code);
 			}
 		}
 	}
 
-	public MainFrame()
-	{
+	public MainFrame() {
 		Init();
 
-		setTitle("Interpretador Assembly");
-        setSize(500,500);
+		setTitle("Interpretador Assembly: mov ax,7 - T:2");
+        setSize(window_width, window_height);
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
