@@ -13,9 +13,12 @@ public class MainFrame extends JFrame implements ActionListener {
 	first_width = window_width/2;
 
 	JMenuBar menuBar;
-	JMenu file;
+	JMenu file, run;
 	JMenuItem open;
+	JMenuItem slow, step, undo, restart;
 	JTextArea codeText;
+	JTextField flags = new JTextField("000");
+	JLabel flagLabel = new JLabel("flags");
 	JTextField[] registers = new JTextField[6];
 	JLabel[] registerLabels = {
 		new JLabel("ax"),
@@ -30,12 +33,24 @@ public class MainFrame extends JFrame implements ActionListener {
 		open = new JMenuItem("Abrir arquivo");
 		open.addActionListener(this);
 
+		slow = new JMenuItem("Devagar");
+		step = new JMenuItem("Passo-a-passo");
+		undo = new JMenuItem("Desfazer");
+		restart = new JMenuItem("Reiniciar");
+
+		run = new JMenu("Rodar");
+		run.add(slow);
+		run.add(step);
+		run.add(undo);
+		run.add(restart);
+
 		file = new JMenu("Arquivo");
 		file.add(open);
 
 		menuBar = new JMenuBar();
 		menuBar.setBounds(0,0,window_width,20);
 		menuBar.add(file);
+		menuBar.add(run);
 
 		codeText = new JTextArea();
 		codeText.setBounds(10, 30, (first_width) - 20, window_height - 80);
@@ -48,12 +63,17 @@ public class MainFrame extends JFrame implements ActionListener {
 			int offset_width = (n%2) * (window_width - first_width)/2 + offsetX + first_width,
 			offset_height = (40 * (n/2)) + offsetY;
 			
-			registerLabels[n].setBounds(offset_width, offset_height, 25, 20);
-			registers[n].setBounds(offset_width + 25, offset_height, 25, 20);
+			registerLabels[n].setBounds(offset_width, offset_height, 20, 20);
+			registers[n].setBounds(offset_width + 20, offset_height, 20, 20);
 
 			add(registerLabels[n]);
 			add(registers[n]);
 		}
+
+		flagLabel.setBounds(first_width + 10, 20*registers.length + offsetY, 40, 20);
+		add(flagLabel);
+		flags.setBounds(first_width + 50, 20*registers.length + offsetY, 30, 20);
+		add(flags);
 
 		add(menuBar);
 		add(codeText);
@@ -89,7 +109,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	public MainFrame() {
 		Init();
 
-		setTitle("Interpretador Assembly: mov ax,7 - T:2");
+		setTitle("mov ax,7 - Interpretador Assembly - T:2");
         setSize(window_width, window_height);
         setLayout(null);
         setVisible(true);
