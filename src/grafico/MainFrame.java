@@ -19,14 +19,18 @@ public class MainFrame extends JFrame implements ActionListener {
 	JTextArea codeText;
 	JTextField flags = new JTextField("000");
 	JLabel flagLabel = new JLabel("flags");
-	JTextField[] registers = new JTextField[6];
+	JTextField[] registers = new JTextField[10];
 	JLabel[] registerLabels = {
 		new JLabel("ax"),
 		new JLabel("bx"),
 		new JLabel("cx"),
 		new JLabel("dx"),
 		new JLabel("pc"),
-		new JLabel("ir")
+		new JLabel("ir"),
+		new JLabel("mar"),
+		new JLabel("mbr"),
+		new JLabel("car"),
+		new JLabel("cbr")
 	};
 
 	private void Init() {
@@ -63,8 +67,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			int offset_width = (n%2) * (window_width - first_width)/2 + offsetX + first_width,
 			offset_height = (40 * (n/2)) + offsetY;
 			
-			registerLabels[n].setBounds(offset_width, offset_height, 20, 20);
-			registers[n].setBounds(offset_width + 20, offset_height, 20, 20);
+			registerLabels[n].setBounds(offset_width, offset_height, 30, 20);
+			registers[n].setBounds(offset_width + 30, offset_height, 20, 20);
 
 			add(registerLabels[n]);
 			add(registers[n]);
