@@ -2,6 +2,6 @@
 // Utiliza somente métidos static
 package src.aux;
 
-public class Compilador {
-    static compilar() {}
+public class Compilator {
+    static void compilar() {}
 }
