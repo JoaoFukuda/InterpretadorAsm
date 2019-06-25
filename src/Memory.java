@@ -1,11 +1,12 @@
 package src;
 import java.util.TreeMap;
+import src.cpn.Register;
 
 public class Memory extends Register{
     
     public TreeMap<Integer,Integer> map;
     public Memory(){
-        super(-1,18);
+        super();
         this.map = new TreeMap<Integer,Integer>();
     }
 
@@ -14,8 +15,11 @@ public class Memory extends Register{
         return this.map.containsKey(endereco);
     }
 
-    public int readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
-        return this.map(super.getData());
+    //Importante: "super.getData() retorna o endereço atual no registrador da Memória"
+
+    public void readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
+        super.setData(this.map.get(super.getData()));
+        super.setBus(false,true);
     }
 
     public int writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes
