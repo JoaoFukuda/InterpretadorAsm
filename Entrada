@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.jar.Pack200;
-//kendy, olhar linhas: 72,78
+//kendy, olhar linhas: 22,74,80,260
 public class Entrada{
     
 
@@ -19,26 +19,31 @@ public class Entrada{
      boolean endereco= true; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
      boolean registrador= false;
      boolean regEndereco= false; // verifica se eh registrador de endereco
-     
+     /* Kendy, se esse endereço tem que guardar tem que ter um jeito de saber
+     qual que é o número, eu não sei direito  */
      String ar= "[AX]";       
             if (p1.equals(ar)){
                 regEndereco = true;
                 endereco=false;
+                //kendy, guardar endereço 
             }
             String br= "[BX]";       
             if (p1.equals(br)){
                 regEndereco = true;
                 endereco=false;
+                //kendy, guardar endereço
             }
             String cr= "[CX]";       
             if (p1.equals(cr)){
                 regEndereco = true;
                 endereco=false;
+                //kendy, guardar endereço
             }
             String dr= "[DX]";       
             if (p1.equals(dr)){
                 regEndereco = true;
                 endereco=false;
+                //kendy, guardar endereço
             }
      
      String a= "AX";       
@@ -221,7 +226,7 @@ if (op.equals(cmp)){
     }
 }   
             
-            	// estou com problemas nesse por enquanto porque nao tem parametro 2            
+               
             
             String jmp="JMP";
             if (op.equals(jmp)){
@@ -252,7 +257,7 @@ if (op.equals(cmp)){
                 opCode="010111";
             }
          
-
+            // kendy, guardar opCode
               return opCode;
             }
          
@@ -307,7 +312,7 @@ if (op.equals(cmp)){
         for (int j=0;j < it ;j++){
             String x= sc.nextLine(); 
           separaIssu(x);
-          // acho que aqui poderiamos chamar a memoria e já guradar o opcode nela.
+          
         }
         sc.close();
         i.close();
