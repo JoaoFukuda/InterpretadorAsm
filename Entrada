@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.jar.Pack200;
-
+//kendy, olhar linhas: 72,78
 public class Entrada{
     
 
@@ -10,14 +10,12 @@ public class Entrada{
         for (int i=1; i<casca.length -1;i++){
             semCasca +=casca[i];
         }
+       
         return semCasca;
     }
 
     static String traduzIssu(String op , String p1, String p2){
         /*Aparentemente p1 nunca serah uma constante*/
-                     
-         
-     
      boolean endereco= true; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
      boolean registrador= false;
      boolean regEndereco= false; // verifica se eh registrador de endereco
@@ -67,16 +65,19 @@ public class Entrada{
      // aqui verifica se eh constante
      boolean ehConstante2= true;
             try{
-             int foi2 = Integer.parseInt(p2);			
+             int foi2 = Integer.parseInt(p2);	
+             // kendy, guardar foi2, que é o parametro 2 (constante)
              System.out.println(foi2);
             }
             catch(NumberFormatException foi2){
                  ehConstante2=false;
+                 String enderecoEmP2=seeInsideAddress(p2);
+                 // kendy, ou guardar enderecoEmP2 que é o parametro 2 (endereço)
             }
             
      /*________________________________________________________________ */
      
-     boolean regEndereco2= false; // verifica se eh registrador de endereco
+     boolean regEndereco2= false; // verifica se eh endereco de registrador
      boolean registrador2= false;
      boolean endereco2= true;
          
@@ -122,13 +123,14 @@ public class Entrada{
                 endereco2= false;
             }
      /* ______________________________________________________________________________________*/
-     
+     //aqui seleciona o opcode
          String opCode="";
            String m="MOV";
            String ad= "ADD";
            String s ="SUB";
            String mu="MUL";
            String dv="DIV";
+           String cmp= "CMP";
             if (op.equals(m)){
                 if(registrador){	//MOV R1, const
                     opCode="000000";
@@ -208,6 +210,17 @@ public class Entrada{
                 }
             }   
 
+                   
+if (op.equals(cmp)){
+    if(registrador && registrador2){   //			CMP R1, R2
+               
+        opCode="011000";
+    }
+    if(registrador && ehConstante2){   //          CMP R1, constante
+        opCode="011010";
+    }
+}   
+            
             	// estou com problemas nesse por enquanto porque nao tem parametro 2            
             
             String jmp="JMP";
@@ -238,10 +251,7 @@ public class Entrada{
             if (op.equals(jle)){
                 opCode="010111";
             }
-            String cmp="CMP";
-            if (op.equals(cmp)){
-                opCode="011000";
-            }
+         
 
               return opCode;
             }
@@ -252,22 +262,23 @@ public class Entrada{
         String operacao="";
         String p1="";
         String p2="";
-        /*
-        if (operacao.equals("JE")|| operacao.equals("JG")|| operacao.equals("JL")){
-            for (int op=0;op<2;op++){ 
-               operacao+=comando[op]; 
-            }
-            for (int y= 3; y<comando.length;y++){
-                p1+=comando[y];
+        
+        int j=0;
+         while (comando[j]!=' '){ 
+            operacao+=comando[j];
+            j++;
+         } 
+         System.out.println(operacao);
+         
+         if (operacao.equals("JE")|| operacao.equals("JG")|| operacao.equals("JL")){
+            for ( j= 3; j<comando.length;j++){
+                p1+=comando[j];
              }
-        }*/
-
-         for (int op=0;op<3;op++){ 
-            operacao+=comando[op]; 
-         }
-
+            
+              p2="oi";
+         }else{
         int i=4;
-       if (operacao.equals("CMP") || operacao.equals("JLE") ||  operacao.equals("JGE") ||operacao.equals("JMP") ||operacao.equals("JNE") ){
+       if ( operacao.equals("JLE") ||  operacao.equals("JGE") ||operacao.equals("JMP") ||operacao.equals("JNE") ){
         for (int y= i; y<comando.length;y++){
             p1+=comando[y];
          }
@@ -281,9 +292,9 @@ public class Entrada{
                 p2+=comando[y];
              }
             }
+        }
         
          System.out.println(traduzIssu(operacao,p1,p2));
-
     }
     
     public static void main(String [] args){
