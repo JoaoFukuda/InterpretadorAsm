@@ -10,15 +10,19 @@ public class Register{
         out = false;
     }
 
-    public void setBus(boolean in, boolean out)
+    public void openIn()
     {
-        this.in = in;
-        this.out = out;
+        in = true;
     }
-    public boolean inOpen(){
+    public void openOut()
+    {
+        out = true;
+    }
+
+    public boolean isInOpen(){
         return this.in;
     }
-    public boolean outOpen(){
+    public boolean isOutOpen(){
         return this.out;
     }
     

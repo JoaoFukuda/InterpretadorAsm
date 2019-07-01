@@ -1,20 +1,26 @@
 // Contém a janela principal do programa
 package src.grafico;
 
+import src.CPU;
+
 import java.util.Scanner;
 
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 
-public class MainFrame extends JFrame implements ActionListener {
+public class MainFrame extends JFrame implements ActionListener
+{
 
 	private int window_width = 500, window_height = 500,
-	first_width = window_width/2;
+    first_width = window_width/2;
 
+    CPU cpu;
+
+    String currLine, currTime;
 	JMenuBar menuBar;
 	JMenu file, run;
-	JMenuItem open;
+	JMenuItem open, compiler;
 	JMenuItem slow, step, undo, restart;
 	JTextArea codeText;
 	JTextField flags = new JTextField("000");
@@ -33,14 +39,24 @@ public class MainFrame extends JFrame implements ActionListener {
 		new JLabel("cbr")
 	};
 
-	private void Init() {
+    private void Init()
+    {
+        cpu = new CPU();
+        cpu.Init();
+
 		open = new JMenuItem("Abrir arquivo");
-		open.addActionListener(this);
+        open.addActionListener(this);
+        compiler = new JMenuItem("Compilar");
+        compiler.addActionListener(this);
 
 		slow = new JMenuItem("Devagar");
+		slow.addActionListener(cpu);
 		step = new JMenuItem("Passo-a-passo");
+		step.addActionListener(cpu);
 		undo = new JMenuItem("Desfazer");
+		undo.addActionListener(cpu);
 		restart = new JMenuItem("Reiniciar");
+		restart.addActionListener(cpu);
 
 		run = new JMenu("Rodar");
 		run.add(slow);
@@ -61,7 +77,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		int offsetX = 10,
 		offsetY = 30;
-		for(int n = 0; n < registers.length; n++) {
+        for(int n = 0; n < registers.length; n++)
+        {
 			registers[n] = new JTextField("00");
 
 			int offset_width = (n%2) * (window_width - first_width)/2 + offsetX + first_width,
@@ -80,45 +97,53 @@ public class MainFrame extends JFrame implements ActionListener {
 		add(flags);
 
 		add(menuBar);
-		add(codeText);
+        add(codeText);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == open) {
-			JFileChooser fc = new JFileChooser();
-			int i = fc.showOpenDialog(this);
-			
-			
-			if(i == JFileChooser.APPROVE_OPTION) {
-				File f = fc.getSelectedFile();
+    public void actionPerformed(ActionEvent e)
+    {
+        switch(((JMenuItem)e.getSource()).getText())
+        {
+            case "Abrir arquivo":
+                JFileChooser fc = new JFileChooser();
+                int i = fc.showOpenDialog(this);
+                
+                if(i == JFileChooser.APPROVE_OPTION)
+                {
+                    File f = fc.getSelectedFile();
 
-				String code = "";
-				try {
-					Scanner in = new Scanner(f);
-	
-					while(in.hasNextLine()) {
-						code += in.nextLine() + "\n";
-					}
+                    String code = "";
+                    try
+                    {
+                        Scanner in = new Scanner(f);
+        
+                        while(in.hasNextLine())
+                        {
+                            code += in.nextLine() + "\n";
+                        }
 
-					in.close();
-				}catch (Exception ex) {
-					code = "O arquivo não foi encontrado!";
-				}
+                        in.close();
+                    }catch (Exception ex)
+                    {
+                        code = "O arquivo não foi encontrado!";
+                    }
 
-				codeText.setText(code);
-			}
+                    codeText.setText(code);
+                }
+                break;
+
+            case "Compilar":
+                break;
 		}
 	}
 
 	public MainFrame() {
 		Init();
 
-		setTitle("mov ax,7 - Interpretador Assembly - T:2");
+		setTitle(currLine + " - Interpretador Assembly - " + currTime);
         setSize(window_width, window_height);
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		//TODO: Código
 	}
 }

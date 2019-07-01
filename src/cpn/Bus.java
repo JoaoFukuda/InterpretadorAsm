@@ -3,31 +3,49 @@ package src.cpn;
 public class Bus
 {
     Register[] registers;
+    int[] inDoors, outDoors;
     boolean hasData;
-    int data;
+    int data, nOfRegisters, end = 0;
+
+    public enum Dir{
+        IN,
+        OUT
+    };
 
     public Bus(int nOfRegisters)
     {
+        this.nOfRegisters = nOfRegisters;
         registers = new Register[nOfRegisters];
+        inDoors = new int[nOfRegisters];
+        outDoors = new int[nOfRegisters];
     }
 
     public void Update()
     {
-        for(Register reg : registers)
+        for(int n = 0; n < nOfRegisters; n++)
         {
-            if(!reg.outOpen()) continue;
+            if(!registers[n].isOutOpen()) continue;
             
             hasData = true;
-            data = reg.getData();
+            data = registers[n].getData();
             break;
         }
 
-        if(hasData) for(Register reg : registers)
+        if(hasData) for(int n = 0; n < nOfRegisters; n++)
         {
-            if(!reg.inOpen())
+            if(!registers[n].isInOpen())
             {
-                reg.setData(data);
+                registers[n].setData(data);
             }
         }
+    }
+
+    public Bus Add(Register reg, int inDoor, int outDoor)
+    {
+        registers[end] = reg;
+        inDoors[end] = inDoor;
+        outDoors[end] = outDoor;
+        end++;
+        return this;
     }
 }

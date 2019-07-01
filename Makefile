@@ -1,4 +1,4 @@
-all:
+all: clear
 	javac src/Main.java
 
 test: all

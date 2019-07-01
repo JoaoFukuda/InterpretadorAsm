@@ -1,7 +1,8 @@
 package src;
 import java.util.TreeMap;
+import src.cpn.Register;
 
-public class Memory{
+public class Memory extends Register{
     public TreeMap<Integer,Integer> map;
     public Memory(){
         this.map = new TreeMap<Integer,Integer>();

@@ -9,6 +9,7 @@ public class ControlUnit {
         // Inicializa as 3 flags necessárias: SINAL, IGUAL A 0 e ERRO
         flags = new boolean[3];
 
+        // Registradores para andar pelo firmware
         CAR = new Register();
         CBR = new Register();
     }
