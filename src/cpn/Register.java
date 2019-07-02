@@ -16,6 +16,14 @@ public class Register{
     public void openOut(){ out = true; }
     public boolean isOutOpen(){ return this.out; }
     
-    public int getData(){ return this.data; }
-    public void setData(int data){ this.data = data; }
+    public int getData()
+    {
+        out = false;
+        return this.data;
+    }
+    public void setData(int data)
+    {
+        in = false;
+        this.data = data;
+    }
 }
