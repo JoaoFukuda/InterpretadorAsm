@@ -12,7 +12,7 @@ public class Memory extends Register{
         super();
         this.map = new TreeMap<Integer,Integer>();
         this.anotherData = -1;
-        this.AVOrreadOrWrite = NONE; // AV = 0; read = 1; write = 2.
+        this.AVOrreadOrWrite = -1; // AV = 0; read = 1; write = 2.
     }
 
 
@@ -26,7 +26,7 @@ public class Memory extends Register{
     public void setData(int data){ //MODIFICACAO: agora -> anotherData = endereco; super.data = dados.
         if(AVOrreadOrWrite == 0) this.anotherData = data;
         else super.data = data;
-        this.AVOrreadOrWrite = NONE;
+        this.AVOrreadOrWrite = -1;
     }
 
     public void Update(){
@@ -37,13 +37,13 @@ public class Memory extends Register{
                 writeMemory(super.data);
             }
         }
-        this.AVOrreadOrWrite = NONE;
+        this.AVOrreadOrWrite = -1;
         this.anotherData = -1;
     }
 
     void readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
         super.setData(this.map.get(this.anotherData));
-        super.setBus(false,true);
+        super.openOut();
     }
 
     int writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes

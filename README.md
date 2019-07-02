@@ -31,6 +31,10 @@ Para rodar você precisa abrir o arquivo criado pelo compilador em ./src/Main.cl
 
     java src.Main
 
+### Utilizar o programa:
+
+
+
 ## Contribuintes
 
 * [João Fukuda](https://www.git.com/JoaoFukuda)
