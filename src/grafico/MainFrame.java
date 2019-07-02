@@ -5,7 +5,7 @@ import src.CPU;
 import src.auxi.Compilator;
 
 import java.util.Scanner;
-
+import java.awt.Color;
 import java.awt.event.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -142,8 +142,8 @@ public class MainFrame extends JFrame implements ActionListener
 	}
 
 	public MainFrame() {
-		Init();
-
+        Init();
+        
 		setTitle(currLine + " - Interpretador Assembly - " + currTime);
         setSize(window_width, window_height);
         setLayout(null);

@@ -38,12 +38,15 @@ public class Register{
 
     public boolean isOpen(int door)
     {
+        if(door == -1) return false;
         int pos;
         if((pos = doorPos(door)) == -1) return false;
         return doors[pos];
     }
+
     public void open(int door)
     {
+        if(door == -1) return;
         int pos;
         if((pos = doorPos(door)) == -1) return;
         doors[pos] = true;
@@ -59,12 +62,14 @@ public class Register{
 
     public int getData(int door)
     {
+        if(door == -1) return -1;
         if(!doors[doorPos(door)]) return -1;
         reset();
         return this.data;
     }
     public void setData(int door, int data)
     {
+        if(door == -1) return;
         if(!doors[doorPos(door)]) return;
         reset();
         this.data = data;
