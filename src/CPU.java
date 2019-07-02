@@ -1,31 +1,31 @@
 package src;
 
-import javax.swing.*;
-import java.awt.event.*;
-
 import src.cpn.*;
 
-public class CPU implements ActionListener
+public class CPU
 {
     Memory MEM;
 
     private Bus barramentoInterno, barramentoExterno;
-    ControlUnit UC;
+    public ControlUnit UC;
+    public ALU ULA;
+    public MAR MAR;
+    public MBR MBR;
+    public Register AX, BX, CX, DX, IR, PC;
 
     public CPU()
     {
         UC = new ControlUnit();
 
-        Register
-        AX = new Register(11, 10),
-        BX = new Register(9, 8),
-        CX = new Register(7, 6),
-        DX = new Register(5, 4),
-        IR = new Register(3, 2),
+        AX = new Register(11, 10);
+        BX = new Register(9, 8);
+        CX = new Register(7, 6);
+        DX = new Register(5, 4);
+        IR = new Register(3, 2);
         PC = new Register(1, 0);
-        ALU ULA = new ALU(20, 21, 22);
-        MAR MAR = new MAR(12, 13);
-        MBR MBR = new MBR(14, 15, 17, 16);
+        ULA = new ALU(20, 21, 22);
+        MAR = new MAR(12, 13);
+        MBR = new MBR(14, 15, 17, 16);
         MEM = new Memory(19, 18);
 
         barramentoInterno = new Bus(10);
@@ -57,6 +57,11 @@ public class CPU implements ActionListener
         // Update the GUI with the necessary information
     }
 
+    public int[] getRegisters()
+    {
+        return(new int[]{AX.data, BX.data, CX.data, DX.data, PC.data, IR.data, MAR.data, MBR.data, UC.CAR.data, UC.CBR.data});
+    }
+
     // Ticks the system, running one time a call
     private void Update()
     {
@@ -67,24 +72,4 @@ public class CPU implements ActionListener
     }
 
     public Memory getMEM(){ return MEM; }
-
-	public void actionPerformed(ActionEvent e) {
-        switch(((JMenuItem)e.getSource()).getText())
-        {
-            case "Devagar":
-                System.out.println("Não está funcionando");
-                break;
-            case "Passo-a-passo":
-                System.out.println("Avançando um tempo");
-                Run();
-                break;
-            case "Desfazer":
-                System.out.println("Não está funcionando");
-                break;
-            case "Reiniciar":
-                System.out.println("Zerar o estado do programa");
-                break;
-            default:
-        }
-	}
 }

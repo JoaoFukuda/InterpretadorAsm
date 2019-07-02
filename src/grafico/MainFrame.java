@@ -3,9 +3,9 @@ package src.grafico;
 
 import src.CPU;
 import src.auxi.Compilator;
+import src.auxi.Hexa;
 
 import java.util.Scanner;
-import java.awt.Color;
 import java.awt.event.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -20,14 +20,15 @@ public class MainFrame extends JFrame implements ActionListener
 
     CPU cpu;
 
-    String currLine, currTime;
+    String currLine;
+    int currTime = 0;
 	JMenuBar menuBar;
 	JMenu file, run;
 	JMenuItem open, compiler;
 	JMenuItem slow, step, undo, restart;
 	JTextArea codeText;
-	JTextField flags = new JTextField("000");
-	JLabel flagLabel = new JLabel("flags");
+	JTextField flags = new JTextField();
+	JLabel flagLabel = new JLabel("flags (ez/s/err)");
 	JTextField[] registers = new JTextField[10];
 	JLabel[] registerLabels = {
 		new JLabel("ax"),
@@ -52,13 +53,13 @@ public class MainFrame extends JFrame implements ActionListener
         compiler.addActionListener(this);
 
 		slow = new JMenuItem("Devagar");
-		slow.addActionListener(cpu);
+		slow.addActionListener(this);
 		step = new JMenuItem("Passo-a-passo");
-		step.addActionListener(cpu);
+		step.addActionListener(this);
 		undo = new JMenuItem("Desfazer");
-		undo.addActionListener(cpu);
+		undo.addActionListener(this);
 		restart = new JMenuItem("Reiniciar");
-		restart.addActionListener(cpu);
+		restart.addActionListener(this);
 
 		run = new JMenu("Rodar");
 		run.add(slow);
@@ -137,9 +138,43 @@ public class MainFrame extends JFrame implements ActionListener
 
             case "Compilar":
                 Compilator.compilar((InputStream)new ByteArrayInputStream(codeText.getText().getBytes(StandardCharsets.UTF_8)), cpu.getMEM());
+                Update();
                 break;
+
+            case "Devagar":
+                System.out.println("Não está funcionando");
+                break;
+
+            case "Passo-a-passo":
+                System.out.println("Avançando um tempo");
+                cpu.Run();
+                Update();
+                break;
+
+            case "Desfazer":
+                System.out.println("Não está funcionando");
+                break;
+
+            case "Reiniciar":
+                System.out.println("Zerar o estado do programa");
+                break;
+
+            default:
 		}
-	}
+    }
+    
+    private void Update()
+    {
+        int[] tempReg = cpu.getRegisters();
+        for(int n = 0; n < registers.length; n++)
+        {
+            registers[n].setText(Hexa.toString(tempReg[n]));
+        }
+        currTime = cpu.UC.time;
+        currLine = "" + cpu.getMEM().map.get(cpu.PC.data);
+        flags.setText(cpu.UC.flagsToString());
+        setTitle(currLine + " - Interpretador Assembly - " + currTime);
+    }
 
 	public MainFrame() {
         Init();

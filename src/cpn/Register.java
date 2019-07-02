@@ -1,7 +1,7 @@
 package src.cpn;
 
 public class Register{
-    protected int data;
+    public int data;
     protected int nOfDoors;
     protected boolean[] doors;
     protected int[] doorsN;

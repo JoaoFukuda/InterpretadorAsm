@@ -4,7 +4,7 @@ import src.cpn.Register;
 
 public class Memory extends Register{
     
-    TreeMap<Integer,Integer> map;
+    public TreeMap<Integer,Integer> map;
     
     int anotherData, AVOrreadOrWrite;    
 
