@@ -12,7 +12,7 @@ public class Memory extends Register{
         super();
         this.map = new TreeMap<Integer,Integer>();
         this.anotherData = -1;
-        this.AVOrReadOrWrite = NONE; // AV = 0; read = 1; write = 2.
+        this.AVOrreadOrWrite = NONE; // AV = 0; read = 1; write = 2.
     }
 
 
