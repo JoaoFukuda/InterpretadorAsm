@@ -3,21 +3,25 @@ package src.cpn;
 public class ALU extends Register
 {
     int inData, calculation;
-    int inX;
 
     public ALU(int inX, int inDoor, int outDoor)
     {
-        super(inDoor, outDoor);
-        this.inX = inX;
+        super(3);
 
-        inData = -1;
+        doorsN[0] = inX;
+        doorsN[1] = inDoor;
+        doorsN[2] = outDoor;
+
+        inData = 0;
         calculation = -1;
     }
 
-    public void setData(int data)
+    public void setData(int door, int data)
     {
-        if(inData == -1) inData = data;
-        else this.data = data;
+        if(!doors[doorPos(door)]) return;
+        reset();
+        if(door == 20) this.data = data;
+        else if(door == 21) inData = data;
     }
 
     public void Update()
@@ -35,11 +39,13 @@ public class ALU extends Register
                 break;
             case 3:
                 data = inData / data;
+                break;
+            case 4:
+                data = inData % data;
         }
 
-        if(calculation != -1) openOut();
+        if(calculation != -1) open(22);
 
-        inData = -1;
         calculation = -1;
     }
 }

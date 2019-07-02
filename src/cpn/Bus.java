@@ -3,6 +3,7 @@ package src.cpn;
 public class Bus
 {
     Register[] registers;
+    int[] inDoors, outDoors;
     boolean hasData;
     int data, nOfRegisters, end = 0;
 
@@ -15,26 +16,31 @@ public class Bus
     {
         this.nOfRegisters = nOfRegisters;
         registers = new Register[nOfRegisters];
+        inDoors = new int[nOfRegisters];
+        outDoors = new int[nOfRegisters];
     }
 
     public void Update()
     {
-        for(Register reg : registers)
+        for(int n = 0; n < nOfRegisters; n++)
         {
-            data = reg.getData();
+            data = registers[n].getData(outDoors[n]);
+            if(data == -1) continue;
             hasData = true;
             break;
         }
 
-        if(hasData) for(Register reg : registers)
+        if(hasData) for(int n = 0; n < nOfRegisters; n++)
         {
-            reg.setData(data);
+            registers[n].setData(inDoors[n], data);
         }
     }
 
-    public Bus Add(Register reg)
+    public Bus Add(Register reg, int inDoor, int outDoor)
     {
         registers[end] = reg;
+        inDoors[end] = inDoor;
+        outDoors[end] = outDoor;
         end++;
         return this;
     }
@@ -42,10 +48,8 @@ public class Bus
     public void openDoors(boolean[] doors)
     {
         for(int n = 0; n <= 22; n++)
-        {
             if(doors[n])
-            {
-            }
-        }
+                for(Register reg : registers)
+                    reg.open(n);
     }
 }

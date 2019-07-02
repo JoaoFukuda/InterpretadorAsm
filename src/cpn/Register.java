@@ -2,33 +2,71 @@ package src.cpn;
 
 public class Register{
     protected int data;
-    protected boolean in, out;
-    protected int inDoor, outDoor;
+    protected int nOfDoors;
+    protected boolean[] doors;
+    protected int[] doorsN;
 
     public Register(int inDoor, int outDoor){
         data = 0;
-        
-        in = false;
-        out = false;
+        nOfDoors = 2;
 
-        this.inDoor = inDoor;
-        this.outDoor = outDoor;
+        doors = new boolean[nOfDoors];
+        for(int n = 0; n < nOfDoors; n++) doors[n] = false;
+
+        doorsN = new int[nOfDoors];
+        doorsN[0] = inDoor;
+        doorsN[1] = outDoor;
     }
 
-    public void openIn(){ in = true; }
-    public boolean isInOpen(){ return this.in; }
-    
-    public void openOut(){ out = true; }
-    public boolean isOutOpen(){ return this.out; }
-    
-    public int getData()
+    public Register(int nOfDoors){
+        data = 0;
+        this.nOfDoors = nOfDoors;
+
+        doors = new boolean[nOfDoors];
+        for(int n = 0; n < nOfDoors; n++) doors[n] = false;
+
+        doorsN = new int[nOfDoors];
+    }
+
+    protected int doorPos(int door)
     {
-        out = false;
+        for(int n = 0; n < nOfDoors; n++)
+            if(doorsN[n] == door) return n;
+        
+            return -1;
+    }
+
+    public boolean isOpen(int door)
+    {
+        int pos;
+        if((pos = doorPos(door)) == -1) return false;
+        return doors[pos];
+    }
+    public void open(int door)
+    {
+        int pos;
+        if((pos = doorPos(door)) == -1) return;
+        doors[pos] = true;
+    }
+
+    protected void reset()
+    {
+        for(int n = 0; n < nOfDoors; n++)
+        {
+            doors[n] = false;
+        }
+    }
+
+    public int getData(int door)
+    {
+        if(!doors[doorPos(door)]) return -1;
+        reset();
         return this.data;
     }
-    public void setData(int data)
+    public void setData(int door, int data)
     {
-        in = false;
+        if(!doors[doorPos(door)]) return;
+        reset();
         this.data = data;
     }
 }

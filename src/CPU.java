@@ -28,23 +28,24 @@ public class CPU implements ActionListener
         MBR MBR = new MBR(14, 15, 17, 16);
         MEM = new Memory(19, 18);
 
-        barramentoInterno = new Bus(9);
+        barramentoInterno = new Bus(10);
         barramentoInterno
-        .Add(AX)
-        .Add(BX)
-        .Add(CX)
-        .Add(DX)
-        .Add(IR)
-        .Add(PC)
-        .Add(ULA)
-        .Add(MAR)
-        .Add(MBR);
+        .Add(AX, 11, 10)
+        .Add(BX, 9, 8)
+        .Add(CX, 7, 6)
+        .Add(DX, 5, 4)
+        .Add(IR, 3, 2)
+        .Add(PC, 1, 0)
+        .Add(ULA, 20, -1)
+        .Add(ULA, 21, 22)
+        .Add(MAR, 12, -1)
+        .Add(MBR, 14, 15);
 
         barramentoExterno = new Bus(3);
         barramentoExterno
-        .Add(MAR)
-        .Add(MBR)
-        .Add(MEM);
+        .Add(MAR, -1, 13)
+        .Add(MBR, 17, 16)
+        .Add(MEM, 19, 18);
     }
     
     // Run the program with the steps informed by the GUI

@@ -42,8 +42,8 @@ public class Memory extends Register{
     }
 
     void readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
-        super.setData(this.map.get(this.anotherData));
-        super.openOut();
+        data = this.map.get(this.anotherData);
+        super.open(18);
     }
 
     int writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes
