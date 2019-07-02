@@ -5,6 +5,8 @@ import src.cpn.Register;
 public class Memory extends Register{
     public TreeMap<Integer,Integer> map;
     public Memory(){
+        super();
+        
         this.map = new TreeMap<Integer,Integer>();
     }
 

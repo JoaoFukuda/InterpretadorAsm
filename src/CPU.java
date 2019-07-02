@@ -7,6 +7,8 @@ import src.cpn.*;
 
 public class CPU implements ActionListener
 {
+    Memory MEM;
+
     private Bus barramentoInterno, barramentoExterno;
     ControlUnit UC;
 
@@ -20,10 +22,10 @@ public class CPU implements ActionListener
         CX = new Register(),
         DX = new Register(),
         IR = new Register(),
-        PC = new Register(),
-        ULA = new ALU(),
-        MAR = new MAR(),
-        MBR = new MBR(),
+        PC = new Register();
+        ALU ULA = new ALU();
+        MAR MAR = new MAR();
+        MBR MBR = new MBR();
         MEM = new Memory();
 
         barramentoInterno = new Bus(10);
@@ -49,7 +51,8 @@ public class CPU implements ActionListener
     // Run the program with the steps informed by the GUI
     public void Run()
     {
-        // Open annd close the necessary doors
+        // Open and close the necessary doors
+        // Transit the data through the open doors
         Update();
         // Update the GUI with the necessary information
     }
@@ -62,6 +65,8 @@ public class CPU implements ActionListener
         barramentoInterno.Update();
         barramentoExterno.Update();
     }
+
+    public Memory getMEM(){ return MEM; }
 
 	public void actionPerformed(ActionEvent e) {
         switch(((JMenuItem)e.getSource()).getText())

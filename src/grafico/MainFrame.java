@@ -2,11 +2,14 @@
 package src.grafico;
 
 import src.CPU;
+import src.auxi.Compilator;
 
 import java.util.Scanner;
 
 import java.awt.event.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame implements ActionListener
@@ -42,7 +45,6 @@ public class MainFrame extends JFrame implements ActionListener
     private void Init()
     {
         cpu = new CPU();
-        cpu.Init();
 
 		open = new JMenuItem("Abrir arquivo");
         open.addActionListener(this);
@@ -65,7 +67,8 @@ public class MainFrame extends JFrame implements ActionListener
 		run.add(restart);
 
 		file = new JMenu("Arquivo");
-		file.add(open);
+        file.add(open);
+        file.add(compiler);
 
 		menuBar = new JMenuBar();
 		menuBar.setBounds(0,0,window_width,20);
@@ -133,6 +136,7 @@ public class MainFrame extends JFrame implements ActionListener
                 break;
 
             case "Compilar":
+                Compilator.compilar((InputStream)new ByteArrayInputStream(codeText.getText().getBytes(StandardCharsets.UTF_8)), cpu.getMEM());
                 break;
 		}
 	}

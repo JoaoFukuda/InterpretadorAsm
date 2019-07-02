@@ -48,4 +48,8 @@ public class Bus
         end++;
         return this;
     }
+
+    public void openDoors(boolean[] doors)
+    {
+    }
 }

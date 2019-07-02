@@ -10,26 +10,12 @@ public class Register{
         out = false;
     }
 
-    public void openIn()
-    {
-        in = true;
-    }
-    public void openOut()
-    {
-        out = true;
-    }
-
-    public boolean isInOpen(){
-        return this.in;
-    }
-    public boolean isOutOpen(){
-        return this.out;
-    }
+    public void openIn(){ in = true; }
+    public boolean isInOpen(){ return this.in; }
     
-    public int getData(){
-        return this.data;
-    }
-    public void setData(int data){
-        this.data = data;
-    }
+    public void openOut(){ out = true; }
+    public boolean isOutOpen(){ return this.out; }
+    
+    public int getData(){ return this.data; }
+    public void setData(int data){ this.data = data; }
 }

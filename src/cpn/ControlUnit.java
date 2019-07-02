@@ -2,12 +2,12 @@
 package src.cpn;
 
 public class ControlUnit {
-    public boolean[] flags;
+    public boolean[] aFlags;
     public Register CAR, CBR;
 
     public ControlUnit() {
         // Inicializa as 3 flags necessárias: SINAL, IGUAL A 0 e ERRO
-        flags = new boolean[3];
+        aFlags = new boolean[3];
 
         // Registradores para andar pelo firmware
         CAR = new Register();

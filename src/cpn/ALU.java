@@ -2,22 +2,14 @@ package src.cpn;
 
 public class ALU extends Register
 {
-    static int
-    NONE = -1,
-    ADD = 0,
-    SUB = 1,
-    MUL = 2,
-    DIV = 3;
-
-    int inData, outData, calculation;
+    int inData, calculation;
 
     public ALU()
     {
         super();
 
-        outData = 0;
         inData = -1;
-        calculation = NONE;
+        calculation = -1;
     }
 
     public void setData(int data)
@@ -31,21 +23,21 @@ public class ALU extends Register
         switch(calculation)
         {
             case 0:
-                outData = inData + data;
+                data = inData + data;
                 break;
             case 1:
-                outData = inData - data;
+                data = inData - data;
                 break;
             case 2:
-                outData = inData * data;
+                data = inData * data;
                 break;
             case 3:
-                outData = inData / data;
+                data = inData / data;
         }
 
-        if(calculation != NONE) out = true;
-        inData = -1;
+        if(calculation != -1) openOut();
 
-        calculation = NONE;
+        inData = -1;
+        calculation = -1;
     }
 }
