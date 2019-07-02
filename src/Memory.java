@@ -8,8 +8,8 @@ public class Memory extends Register{
     
     int anotherData, AVOrreadOrWrite;    
 
-    public Memory(){
-        super();
+    public Memory(int inDoor, int outDoor){
+        super(inDoor, outDoor);
         this.map = new TreeMap<Integer,Integer>();
         this.anotherData = -1;
         this.AVOrreadOrWrite = -1; // AV = 0; read = 1; write = 2.

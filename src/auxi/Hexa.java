@@ -17,6 +17,28 @@ public class Hexa {
         return res;
     }
 
+    public static boolean isHexa(String hexa)
+    {
+        boolean res = true;
+
+        if(hexa.length() != 2) res = false;
+        else
+        {
+            res = false;
+            for(int i = 0; i < 2; i++)
+            {
+                for(char c : hexachar)
+                {
+                    if(hexa.charAt(i) == c) res = true;
+                    continue;
+                }
+                if(!res) break;
+            }
+        }
+
+        return res;
+    }
+
     public static String toString(int hexa) {
         return hexachar[hexa/16] + "" + hexachar[hexa%16];
     }

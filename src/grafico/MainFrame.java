@@ -82,13 +82,13 @@ public class MainFrame extends JFrame implements ActionListener
 		offsetY = 30;
         for(int n = 0; n < registers.length; n++)
         {
-			registers[n] = new JTextField("00");
+			registers[n] = new JTextField();
 
 			int offset_width = (n%2) * (window_width - first_width)/2 + offsetX + first_width,
 			offset_height = (40 * (n/2)) + offsetY;
 			
 			registerLabels[n].setBounds(offset_width, offset_height, 30, 20);
-			registers[n].setBounds(offset_width + 30, offset_height, 20, 20);
+			registers[n].setBounds(offset_width + 30, offset_height, 30, 20);
 
 			add(registerLabels[n]);
 			add(registers[n]);

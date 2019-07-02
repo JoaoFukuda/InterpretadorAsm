@@ -2,8 +2,8 @@ package src.cpn;
 
 public class MAR extends Register
 {
-    public MAR()
+    public MAR(int inDoor, int outDoor)
     {
-        super();
+        super(inDoor, outDoor);
     }
 }

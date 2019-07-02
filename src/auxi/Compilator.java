@@ -81,8 +81,8 @@ public class Compilator {
              System.out.println(foi2);
             }
             catch(NumberFormatException foi2){
-                 ehConstante2=false;
-                 String enderecoEmP2=seeInsideAddress(p2);
+                 ehConstante2 = false;
+                 String enderecoEmP2 = seeInsideAddress(p2);
                  // kendy, ou guardar enderecoEmP2 que é o parametro 2 (endereço)
             }
             

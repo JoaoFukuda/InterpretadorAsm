@@ -3,10 +3,12 @@ package src.cpn;
 public class ALU extends Register
 {
     int inData, calculation;
+    int inX;
 
-    public ALU()
+    public ALU(int inX, int inDoor, int outDoor)
     {
-        super();
+        super(inDoor, outDoor);
+        this.inX = inX;
 
         inData = -1;
         calculation = -1;

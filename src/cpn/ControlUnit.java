@@ -10,7 +10,7 @@ public class ControlUnit {
         aFlags = new boolean[3];
 
         // Registradores para andar pelo firmware
-        CAR = new Register();
-        CBR = new Register();
+        CAR = new Register(-1, -1);
+        CBR = new Register(-1, -1);
     }
 }

@@ -2,8 +2,10 @@ package src.cpn;
 
 public class MBR extends Register
 {
-    public MBR()
+    int inDoorE, outDoorE;
+    public MBR(int inDoorI, int outDoorI, int inDoorE, int outDoorE)
     {
-        super();
+        super(inDoorI, outDoorI);
+
     }
 }
