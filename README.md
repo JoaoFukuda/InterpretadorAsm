@@ -6,6 +6,8 @@ Trabalho da matéria de Organização de Computadores digitais no curso de Siste
 
 A arquitetura que vai ser implementada é baseada no 8086:
 ![image](https://user-images.githubusercontent.com/37672942/58655907-a21c3e80-82f1-11e9-85ba-7770c2641acd.png "Arquitetura planejada (foto atualizada)")
+Desenhada e com as portas:
+![image](https://user-images.githubusercontent.com/37672942/60569249-3f312380-9d45-11e9-9012-83769344404d.png "Arquitetura com identificação nas portas")
 
 ## Como usar
 ### Compilar
