@@ -36,57 +36,58 @@ public class Compilator {
      boolean regEndereco= false; // verifica se eh registrador de endereco
      /* Kendy, se esse endereço tem que guardar tem que ter um jeito de saber
      qual que é o número, eu não sei direito  */
-     String ar= "[AX]";       
-            if (p1.equals(ar)){
+     String ar= "[AX]";
+     String br= "[BX]";
+     String cr= "[CX]";    
+     String dr= "[DX]";
+     String a= "AX";
+     String b= "BX";
+     String c= "CX";
+     String d= "DX";
+            if (p1.equalsIgnoreCase(ar)){
                 regEndereco = true;
                 endereco=false;
                 //kendy, guardar endereço 
             }
-            String br= "[BX]";       
-            if (p1.equals(br)){
+            else if (p1.equalsIgnoreCase(br)){
                 regEndereco = true;
                 endereco=false;
                 //kendy, guardar endereço
             }
-            String cr= "[CX]";       
-            if (p1.equals(cr)){
+            else if (p1.equalsIgnoreCase(cr)){
                 regEndereco = true;
                 endereco=false;
                 //kendy, guardar endereço
             }
-            String dr= "[DX]";       
-            if (p1.equals(dr)){
+            else if (p1.equalsIgnoreCase(dr)){
                 regEndereco = true;
                 endereco=false;
                 //kendy, guardar endereço
             }
-     
-     String a= "AX";       
-            if (p1.equals(a)){
+            else if (p1.equalsIgnoreCase(a)){
                 registrador = true;
                 endereco=false;
             }
-            String b= "BX";       
-            if (p1.equals(b)){
+            else if (p1.equalsIgnoreCase(b)){
                 registrador = true;
                 endereco=false;
             }
-            String c= "CX";       
-            if (p1.equals(c)){
+            else if (p1.equalsIgnoreCase(c)){
                 registrador = true;
                 endereco=false;
             }
-            String d= "DX";       
-            if (p1.equals(d)){
+            else if (p1.equalsIgnoreCase(d)){
                 registrador = true;
                 endereco=false;
             }
-
-            String enderecoEmP1=seeInsideAddress(p1);
-            int endP1= Integer.parseInt(enderecoEmP1);
-            if (endereco== true){
-                mem.adicionaDireto(enderecoP1,endP1);
-                
+            else
+            {
+                String enderecoEmP1=seeInsideAddress(p1);
+                int endP1= Integer.parseInt(enderecoEmP1);
+                if (endereco== true){
+                    mem.adicionaDireto(enderecoP1,endP1);
+                    
+                }
             }
      /*__________________________________________________________________ */
      // aqui verifica se eh constante
@@ -116,43 +117,43 @@ public class Compilator {
      boolean endereco2= true;
          
         
-            if (p2.equals(ar)){
+            if (p2.equalsIgnoreCase(ar)){
                 regEndereco2 = true;
                 endereco2=false;
             }
                    
-            if (p2.equals(br)){
+            else if (p2.equalsIgnoreCase(br)){
                 regEndereco2 = true;
                 endereco2=false;
             }
                    
-            if (p2.equals(cr)){
+            else if (p2.equalsIgnoreCase(cr)){
                 regEndereco2 = true;
                 endereco2=false;
             }
                    
-            if (p2.equals(dr)){
+            else if (p2.equalsIgnoreCase(dr)){
                 regEndereco2 = true;
                 endereco2 =false;
             }
      
      
-            if (p2.equals(a)){
+            else if (p2.equalsIgnoreCase(a)){
                 registrador2 = true;
                 endereco2= false;
             }
             
-            if (p2.equals(b)){
+            else if (p2.equalsIgnoreCase(b)){
                 registrador2 = true;
                 endereco2= false;
             }
          
-            if (p2.equals(c)){
+            else if (p2.equalsIgnoreCase(c)){
                 registrador2 = true;
                 endereco2= false;
             }
                 
-            if (p2.equals(d)){
+            else if (p2.equalsIgnoreCase(d)){
                 registrador2 = true;
                 endereco2= false;
             }
@@ -165,7 +166,7 @@ public class Compilator {
            String mu="MUL";
            String dv="DIV";
            String cmp= "CMP";
-            if (op.equals(m)){
+            if (op.equalsIgnoreCase(m)){
                 if(registrador){	//MOV R1, const
                     opCode="000000";
                 } 
@@ -195,7 +196,7 @@ public class Compilator {
 
             }
 
-            if (op.equals(ad)){
+            if (op.equalsIgnoreCase(ad)){
                 if(registrador && registrador2){   //		ADD R1, R2
                     opCode="000111";
                 }
@@ -204,7 +205,7 @@ public class Compilator {
                 }
             }
 
-            if (op.equals(s)){
+            if (op.equalsIgnoreCase(s)){
                 if(registrador && registrador2){   //	SUB R1, R2
                     opCode="001001";
                 }
@@ -213,7 +214,7 @@ public class Compilator {
                 }
             }
 
-            if (op.equals(mu)){
+            if (op.equalsIgnoreCase(mu)){
                 if(registrador && registrador2){   //		MUL R1, R2
                     opCode="001011";
                 }
@@ -222,7 +223,7 @@ public class Compilator {
                 }
             }
 
-            if (op.equals(dv)){
+            if (op.equalsIgnoreCase(dv)){
                 if(registrador && registrador2){   //			DIV R1, R2
                    		
                     opCode="001101";
@@ -234,7 +235,7 @@ public class Compilator {
 
             		
 
-            if (op.equals(d)){
+            if (op.equalsIgnoreCase(d)){
                 if(registrador && registrador2){   //			MOD R1, R2
                    		
                     opCode="001111";
@@ -245,7 +246,7 @@ public class Compilator {
             }   
 
                    
-if (op.equals(cmp)){
+if (op.equalsIgnoreCase(cmp)){
     if(registrador && registrador2){   //			CMP R1, R2
                
         opCode="011000";
@@ -258,31 +259,31 @@ if (op.equals(cmp)){
                
             
             String jmp="JMP";
-            if (op.equals(jmp)){
+            if (op.equalsIgnoreCase(jmp)){
                 opCode="010001";
             }
             String jne="JNE";
-            if (op.equals(jne)){
+            if (op.equalsIgnoreCase(jne)){
                 opCode="010011";
             }
             String je="JE";
-            if (op.equals(je)){
+            if (op.equalsIgnoreCase(je)){
                 opCode="010010";
             }
             String jg="JG";
-            if (op.equals(jg)){
+            if (op.equalsIgnoreCase(jg)){
                 opCode="010100";
             }
             String jge="JGE";
-            if (op.equals(jge)){
+            if (op.equalsIgnoreCase(jge)){
                 opCode="010101";
             }
             String jl="JL";
-            if (op.equals(jl)){
+            if (op.equalsIgnoreCase(jl)){
                 opCode="010110";
             }
             String jle="JLE";
-            if (op.equals(jle)){
+            if (op.equalsIgnoreCase(jle)){
                 opCode="010111";
             }
             int opcodee = Integer.parseInt(opCode);
@@ -306,10 +307,9 @@ if (op.equals(cmp)){
          while (comando[j]!=' '){ 
             operacao+=comando[j];
             j++;
-         } 
-         System.out.println(operacao);
+         }
          
-         if (operacao.equals("JE")|| operacao.equals("JG")|| operacao.equals("JL")){
+         if (operacao.equalsIgnoreCase("JE")|| operacao.equalsIgnoreCase("JG")|| operacao.equalsIgnoreCase("JL")){
             for ( j= 3; j<comando.length;j++){
                 p1+=comando[j];
              }
@@ -317,7 +317,7 @@ if (op.equals(cmp)){
               p2="oi";
          }else{
         int i=4;
-       if ( operacao.equals("JLE") ||  operacao.equals("JGE") ||operacao.equals("JMP") ||operacao.equals("JNE") ){
+       if ( operacao.equalsIgnoreCase("JLE") ||  operacao.equalsIgnoreCase("JGE") ||operacao.equalsIgnoreCase("JMP") ||operacao.equalsIgnoreCase("JNE") ){
         for (int y= i; y<comando.length;y++){
             p1+=comando[y];
          }
@@ -332,8 +332,10 @@ if (op.equals(cmp)){
              }
             }
         }
+
+        System.out.println(operacao + " " + p1 + " " + p2);
         
-         System.out.println(traduzIssu(operacao,p1,p2));
+        System.out.println(traduzIssu(operacao,p1,p2));
     }
 
     static public void compilar(InputStream input, Memory mem)
