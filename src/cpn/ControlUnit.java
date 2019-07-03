@@ -19,6 +19,11 @@ public class ControlUnit {
     private Register pc;
     private MBR mbr;
 
+    private int[] inMasks =  {11, 9, 7, 5};
+    private int[] outMasks = {10, 8, 6, 4};
+    private int[] inTime = {-1, -1, -1, -1};
+    private int[] outTime = {-1, -1, -1, -1};
+
     // The name of the file to open.
     String firmware = "firmware.txt";
 
@@ -113,59 +118,92 @@ public class ControlUnit {
         {
             case 0:
                 CAR.data = 4;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 1:
                 CAR.data = 5;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 2:
                 CAR.data = 8;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 4:
                 CAR.data = 11;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16);
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 5:
                 CAR.data = 14;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 3;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 6:
                 CAR.data = 18;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 3;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 0;
                 break;
             case 7:
                 CAR.data = 22;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 8:
                 CAR.data = 25;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 9:
                 CAR.data = 28;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 10:
                 CAR.data = 31;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 11:
                 CAR.data = 34;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 12:
                 CAR.data = 37;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 13:
                 CAR.data = 40;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 14:
                 CAR.data = 43;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 15:
                 CAR.data = 46;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 16:
                 CAR.data = 49;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 2;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
             case 17:
@@ -198,22 +236,37 @@ public class ControlUnit {
                 break;
             case 24:
                 CAR.data = 65;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 1;
                 break;
             case 25:
                 CAR.data = 67;
+                inTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16)] = 0;
                 break;
             case 26:
                 CAR.data = 68;
+                outTime[Integer.parseInt(mem.map.get((pc.data - 3) + 1), 16)] = 0;
                 mbr.data = Integer.parseInt(mem.map.get((pc.data - 3) + 2), 16);
                 break;
         }
+        time = 0;
     }
 
     public void Update()
     {
-        time++;
-        
         getLine(CAR.data);
+
+        for(int n = 0; n < 4; n++)
+        {
+            if(inTime[n] - time == 0)
+                doors[inMasks[n]] = true;
+
+            if(outTime[n] - time == 0)
+                doors[outMasks[n]] = true;
+        }
+
+        time++;
 
         CAR.data++;
 
@@ -255,13 +308,36 @@ public class ControlUnit {
                 System.out.println("arFlags:" + arFlag);
         }
 
+        boolean jmp = false;
         switch(jmpCond)
         {
             case "001":
-                time = 0;
-                CAR.data = 0;
+                jmp = true;
+                break;
+            case "010":
+                jmp = aFlags[0];
+                break;
+            case "011":
+                jmp = !aFlags[0] && aFlags[1];
+                break;
+            case "100":
+                jmp = !aFlags[0] && !aFlags[1];
+                break;
+            case "101":
+                jmp = aFlags[0] && !aFlags[1];
+                break;
+            case "110":
+                jmp = !aFlags[0];
+                break;
+            case "111":
+                jmp = aFlags[0] && aFlags[1];
                 break;
             default:
+        }
+        if(jmp)
+        {
+            time = 0;
+            CAR.data = 0;
         }
 
         internalBus.openDoors(doors);

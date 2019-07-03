@@ -66,9 +66,9 @@ public class MainFrame extends JFrame implements ActionListener
 		restart.addActionListener(this);
 
 		run = new JMenu("Rodar");
-		run.add(slow);
+		// run.add(slow);
 		run.add(step);
-		run.add(undo);
+		// run.add(undo);
 		run.add(restart);
 
 		file = new JMenu("Arquivo");
