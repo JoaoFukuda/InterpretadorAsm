@@ -18,11 +18,15 @@ public class ControlUnit {
     public String flagsToString()
     {
         String res = "";
-        
+
         res += aFlags[0] ? "1" : "0";
         res += aFlags[1] ? "1" : "0";
         res += aFlags[2] ? "1" : "0";
 
         return res;
+    }
+
+    public void Update()
+    {
     }
 }

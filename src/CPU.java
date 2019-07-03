@@ -67,8 +67,11 @@ public class CPU
     {
         //Update the PC and CAR
 
+        UC.Update();
         barramentoInterno.Update();
         barramentoExterno.Update();
+        ULA.Update();
+        MEM.Update();
     }
 
     public Memory getMEM(){ return MEM; }
