@@ -26,6 +26,8 @@ public class Compilator {
     }
 
     static private String traduzIssu(String op , String p1, String p2){
+
+        System.out.println(op + " " + p1 + " " + p2);
         
 
         /*Aparentemente p1 nunca serah uma constante*/
@@ -79,6 +81,8 @@ public class Compilator {
             registrador = true;
             p1 = "3";
         }
+        else if(Hexa.isHexa(p1))
+        {}
         else{
             endereco = true;
             p1 = seeInsideAddress(p1);
@@ -318,8 +322,6 @@ if (op.equalsIgnoreCase("CMP")){
              }
             }
         }
-
-        System.out.println(operacao + " " + p1 + " " + p2);
         
         System.out.println(traduzIssu(operacao,p1,p2));
     }

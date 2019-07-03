@@ -185,10 +185,7 @@ public class MainFrame extends JFrame implements ActionListener
 
     private void Update()
     {
-        System.out.println("Mem addr: " + cpu.getMEM().anotherData + "\ndata: " + cpu.getMEM().data);
-
         int[] tempReg = cpu.getRegisters();
-
         for(int n = 0; n < registers.length; n++)
         {
             int tes = tempReg[n];
