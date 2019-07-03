@@ -42,9 +42,12 @@ public class ALU extends Register
                 break;
             case 4:
                 data = inData % data;
+                break;
+            default:
+                return;
         }
 
-        if(calculation != -1) open(22);
+        open(22);
 
         calculation = -1;
     }

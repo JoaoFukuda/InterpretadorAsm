@@ -95,9 +95,9 @@ public class MainFrame extends JFrame implements ActionListener
 			add(registers[n]);
 		}
 
-		flagLabel.setBounds(first_width + 10, 20*registers.length + offsetY, 40, 20);
+		flagLabel.setBounds(first_width + 10, 20*registers.length + offsetY, 100, 20);
 		add(flagLabel);
-		flags.setBounds(first_width + 50, 20*registers.length + offsetY, 30, 20);
+		flags.setBounds(first_width + 110, 20*registers.length + offsetY, 30, 20);
 		add(flags);
 
 		add(menuBar);
@@ -168,10 +168,10 @@ public class MainFrame extends JFrame implements ActionListener
         int[] tempReg = cpu.getRegisters();
         for(int n = 0; n < registers.length; n++)
         {
-            registers[n].setText(Hexa.toString(tempReg[n]));
+            registers[n].setText(Hexa.intToString(tempReg[n]));
         }
         currTime = cpu.UC.time;
-        currLine = "" + cpu.getMEM().map.get(cpu.PC.data);
+        currLine = cpu.getMEM().map.get(cpu.PC.data);
         flags.setText(cpu.UC.flagsToString());
         setTitle(currLine + " - Interpretador Assembly - " + currTime);
     }
@@ -179,7 +179,7 @@ public class MainFrame extends JFrame implements ActionListener
 	public MainFrame() {
         Init();
         
-		setTitle(currLine + " - Interpretador Assembly - " + currTime);
+        setTitle("Interpretador Assembly");
         setSize(window_width, window_height);
         setLayout(null);
         setVisible(true);

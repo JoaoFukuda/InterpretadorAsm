@@ -5,7 +5,7 @@ import src.auxi.Hexa;
 
 public class Memory extends Register{
     
-    public TreeMap<Integer,Integer> map;
+    public TreeMap<Integer,String> map;
     
     int anotherData, AVOrreadOrWrite;    
 
@@ -43,22 +43,22 @@ public class Memory extends Register{
     }
 
     void readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
-        data = hexa.toInt(this.map.get(this.anotherData));
+        data = Hexa.strToInt(this.map.get(this.anotherData));
         super.open(18);
     }
 
     String writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes
-        return this.map.put(this.anotherData,hexa.toString(data));
+        return this.map.put(this.anotherData,Hexa.intToString(data));
     }
 
     public boolean adicionaDireto(int endereco, int dados){ //Adiciona coisas na memoria diretamente, falha se já tiver coisa no endereco
         if(this.map.containsKey(endereco)) return false;
-        this.map.put(endereco,hexa.toString(dados));
+        this.map.put(endereco,Hexa.intToString(dados));
         return true;
     }
 
     String pegaDireto(int endereco){
-        return hexa.toInt(this.map.get(endereco)); 
+        return this.map.get(endereco);
     }
     /*
     Para usar o mapa:
