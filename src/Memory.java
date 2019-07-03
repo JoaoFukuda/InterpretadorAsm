@@ -1,6 +1,7 @@
 package src;
 import java.util.TreeMap;
 import src.cpn.Register;
+import src.auxi.Hexa;
 
 public class Memory extends Register{
     
@@ -10,7 +11,7 @@ public class Memory extends Register{
 
     public Memory(int inDoor, int outDoor){
         super(inDoor, outDoor);
-        this.map = new TreeMap<Integer,Integer>();
+        this.map = new TreeMap<Integer,String>();
         this.anotherData = -1;
         this.AVOrreadOrWrite = -1; // AV = 0; read = 1; write = 2.
     }
@@ -42,18 +43,22 @@ public class Memory extends Register{
     }
 
     void readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
-        data = this.map.get(this.anotherData);
+        data = hexa.toInt(this.map.get(this.anotherData));
         super.open(18);
     }
 
-    int writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes
-        return this.map.put(this.anotherData,data);
+    String writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes
+        return this.map.put(this.anotherData,hexa.toString(data));
     }
 
     public boolean adicionaDireto(int endereco, int dados){ //Adiciona coisas na memoria diretamente, falha se já tiver coisa no endereco
         if(this.map.containsKey(endereco)) return false;
-        this.map.put(endereco,dados);
+        this.map.put(endereco,hexa.toString(dados));
         return true;
+    }
+
+    String pegaDireto(int endereco){
+        return hexa.toInt(this.map.get(endereco)); 
     }
     /*
     Para usar o mapa:
