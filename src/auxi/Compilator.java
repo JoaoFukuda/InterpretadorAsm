@@ -8,6 +8,8 @@ import java.util.Scanner;
 import src.Memory;
 
 public class Compilator {
+    private static Memory mem;
+
     static private String seeInsideAddress(String shell)
     {
         char [] casca = shell.toCharArray();
@@ -26,7 +28,6 @@ public class Compilator {
         int enderecoOpcode=0;
         int enderecoP1=1;
         int enderecoP2=2;
-        Memory mem= new Memory(); 
         
 
         /*Aparentemente p1 nunca serah uma constante*/
@@ -337,6 +338,7 @@ if (op.equals(cmp)){
 
     static public void compilar(InputStream input, Memory mem)
     {
+        Compilator.mem = mem;
         Scanner in = new Scanner(input);
 
         while(in.hasNextLine())
