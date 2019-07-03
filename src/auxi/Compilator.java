@@ -21,6 +21,14 @@ public class Compilator {
     }
 
     static private String traduzIssu(String op , String p1, String p2){
+
+        
+        int enderecoOpcode=0;
+        int enderecoP1=1;
+        int enderecoP2=2;
+        Memory mem= new Memory(); 
+        
+
         /*Aparentemente p1 nunca serah uma constante*/
      boolean endereco= true; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
      boolean registrador= false;
@@ -72,17 +80,31 @@ public class Compilator {
                 registrador = true;
                 endereco=false;
             }
+
+            String enderecoEmP1=seeInsideAddress(p1);
+            int endP1= Integer.parseInt(enderecoEmP1);
+            if (endereco== true){
+                mem.adicionaDireto(enderecoP1,endP1);
+                
+            }
      /*__________________________________________________________________ */
      // aqui verifica se eh constante
      boolean ehConstante2= true;
+     String enderecoEmP2="";
+     int endP2;
             try{
              int foi2 = Integer.parseInt(p2);	
              // kendy, guardar foi2, que é o parametro 2 (constante)
              System.out.println(foi2);
+             mem.adicionaDireto(enderecoP2,foi2);
+            
             }
             catch(NumberFormatException foi2){
                  ehConstante2 = false;
-                 String enderecoEmP2 = seeInsideAddress(p2);
+                 enderecoEmP2 = seeInsideAddress(p2);
+                 endP2=Integer.parseInt(enderecoEmP2);
+                 mem.adicionaDireto(enderecoP2,endP2);
+                 
                  // kendy, ou guardar enderecoEmP2 que é o parametro 2 (endereço)
             }
             
@@ -262,9 +284,14 @@ if (op.equals(cmp)){
             if (op.equals(jle)){
                 opCode="010111";
             }
-         
-            // kendy, guardar opCode
-              return opCode;
+            int opcodee = Integer.parseInt(opCode);
+            mem.adicionaDireto(enderecoOpcode,opcodee);
+            enderecoOpcode+=3;
+            enderecoP1+=3;
+            enderecoP2+=3;
+            
+
+            return opCode;
             }
          
     
@@ -318,7 +345,7 @@ if (op.equals(cmp)){
             separaIssu(x);
         }
 
-        // Colocar os opcodes na memória
+        
 
         in.close();
     }
