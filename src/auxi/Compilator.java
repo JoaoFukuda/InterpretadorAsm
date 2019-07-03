@@ -9,9 +9,9 @@ import src.Memory;
 
 public class Compilator {
     private static Memory mem;
-    static int enderecoOpcode=0;
-    static int enderecoP1=1;
-    static int enderecoP2=2;
+    public static int enderecoOpcode=0;
+    public static int enderecoP1=1;
+    public static int enderecoP2=2;
 
     static private String seeInsideAddress(String shell)
     {

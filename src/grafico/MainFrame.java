@@ -156,6 +156,9 @@ public class MainFrame extends JFrame implements ActionListener
 
             case "Compilar":
                 cpu = new CPU();
+                Compilator.enderecoOpcode=0;
+                Compilator.enderecoP1=1;
+                Compilator.enderecoP2=2;
                 Compilator.compilar((InputStream)new ByteArrayInputStream(codeText.getText().getBytes(StandardCharsets.UTF_8)), cpu.getMEM());
                 Update();
                 break;
@@ -175,6 +178,10 @@ public class MainFrame extends JFrame implements ActionListener
 
             case "Reiniciar":
                 cpu = new CPU();
+                Compilator.enderecoOpcode=0;
+                Compilator.enderecoP1=1;
+                Compilator.enderecoP2=2;
+                Compilator.compilar((InputStream)new ByteArrayInputStream(codeText.getText().getBytes(StandardCharsets.UTF_8)), cpu.getMEM());
                 Update();
                 break;
 

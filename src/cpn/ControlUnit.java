@@ -260,10 +260,16 @@ public class ControlUnit {
         for(int n = 0; n < 4; n++)
         {
             if(inTime[n] - time == 0)
+            {
                 doors[inMasks[n]] = true;
+                inTime[n] = -1;
+            }
 
             if(outTime[n] - time == 0)
+            {
                 doors[outMasks[n]] = true;
+                outTime[n] = -1;
+            }
         }
 
         time++;
