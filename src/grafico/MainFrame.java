@@ -18,7 +18,7 @@ public class MainFrame extends JFrame implements ActionListener
 	private int window_width = 500, window_height = 500,
     first_width = window_width/2;
 
-    CPU cpu;
+    CPU cpu = null;
 
     String currLine;
     int currTime = 0;
@@ -45,8 +45,6 @@ public class MainFrame extends JFrame implements ActionListener
 
     private void Init()
     {
-        cpu = new CPU();
-
 		open = new JMenuItem("Abrir arquivo");
         open.addActionListener(this);
         compiler = new JMenuItem("Compilar");
@@ -137,6 +135,7 @@ public class MainFrame extends JFrame implements ActionListener
                 break;
 
             case "Compilar":
+                cpu = new CPU();
                 Compilator.compilar((InputStream)new ByteArrayInputStream(codeText.getText().getBytes(StandardCharsets.UTF_8)), cpu.getMEM());
                 Update();
                 break;
@@ -146,7 +145,6 @@ public class MainFrame extends JFrame implements ActionListener
                 break;
 
             case "Passo-a-passo":
-                System.out.println("Avançando um tempo");
                 cpu.Run();
                 Update();
                 break;
@@ -156,7 +154,8 @@ public class MainFrame extends JFrame implements ActionListener
                 break;
 
             case "Reiniciar":
-                System.out.println("Zerar o estado do programa");
+                cpu = new CPU();
+                Update();
                 break;
 
             default:

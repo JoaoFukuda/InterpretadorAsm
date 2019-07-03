@@ -15,8 +15,6 @@ public class CPU
 
     public CPU()
     {
-        UC = new ControlUnit();
-
         AX = new Register(11, 10);
         BX = new Register(9, 8);
         CX = new Register(7, 6);
@@ -46,6 +44,8 @@ public class CPU
         .Add(MAR, -1, 13)
         .Add(MBR, 17, 16)
         .Add(MEM, 19, 18);
+
+        UC = new ControlUnit(ULA, MEM, barramentoInterno, barramentoExterno);
     }
     
     // Run the program with the steps informed by the GUI
@@ -70,7 +70,6 @@ public class CPU
         UC.Update();
         barramentoInterno.Update();
         barramentoExterno.Update();
-        ULA.Update();
         MEM.Update();
     }
 

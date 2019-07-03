@@ -7,7 +7,8 @@ public class Memory extends Register{
     
     public TreeMap<Integer,String> map;
     
-    int anotherData, AVOrreadOrWrite;    
+    int anotherData;
+    public int AVOrreadOrWrite;
 
     public Memory(int inDoor, int outDoor){
         super(inDoor, outDoor);
@@ -43,7 +44,9 @@ public class Memory extends Register{
     }
 
     void readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
-        data = Hexa.strToInt(this.map.get(this.anotherData));
+        String tempData = this.map.get(this.anotherData);
+        if(tempData == null) tempData = "00";
+        data = Hexa.strToInt(tempData);
         super.open(18);
     }
 

@@ -20,12 +20,20 @@ public class ALU extends Register
     {
         if(!doors[doorPos(door)]) return;
         reset();
-        if(door == 20) this.data = data;
-        else if(door == 21) inData = data;
+        if(door == 20) inData = data;
+        else if(door == 21)
+        {
+            this.data = data;
+            Update();
+        }
     }
 
-    public void Update()
+    private void Update()
     {
+        if(calculation == -1) return;
+
+        System.out.println("Making the operation " + calculation + "on " + inData + " and " + data);
+
         switch(calculation)
         {
             case 0:
@@ -35,19 +43,20 @@ public class ALU extends Register
                 data = inData - data;
                 break;
             case 2:
-                data = inData * data;
+                data = inData / data;
                 break;
             case 3:
-                data = inData / data;
+                data = inData * data;
                 break;
             case 4:
                 data = inData % data;
                 break;
+            case 5:
+                data++;
+                break;
             default:
                 return;
         }
-
-        open(22);
 
         calculation = -1;
     }

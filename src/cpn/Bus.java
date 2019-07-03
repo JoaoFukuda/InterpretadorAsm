@@ -30,10 +30,14 @@ public class Bus
             break;
         }
 
+        System.out.println(data + " is on the bus");
+
         if(hasData) for(int n = 0; n < nOfRegisters; n++)
         {
             registers[n].setData(inDoors[n], data);
         }
+
+        data = -1;
     }
 
     public Bus Add(Register reg, int inDoor, int outDoor)
@@ -47,7 +51,7 @@ public class Bus
 
     public void openDoors(boolean[] doors)
     {
-        for(int n = 0; n <= 22; n++)
+        for(int n = 0; n < 23; n++)
             if(doors[n])
                 for(Register reg : registers)
                     reg.open(n);
