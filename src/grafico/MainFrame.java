@@ -33,6 +33,8 @@ public class MainFrame extends JFrame implements ActionListener
 	JLabel barrInternoLabel = new JLabel("Barramento Interno");
 	JTextField barrExterno = new JTextField();
 	JLabel barrExternoLabel = new JLabel("Barramento Externo");
+	JTextField busDoor = new JTextField();
+	JLabel busDoorLabel = new JLabel("port");
 	JTextField[] registers = new JTextField[10];
 	JLabel[] registerLabels = {
 		new JLabel("ax"),
@@ -55,11 +57,11 @@ public class MainFrame extends JFrame implements ActionListener
         compiler.addActionListener(this);
 
 		slow = new JMenuItem("Devagar");
-		slow.addActionListener(this);
+		// slow.addActionListener(this);
 		step = new JMenuItem("Passo-a-passo");
 		step.addActionListener(this);
 		undo = new JMenuItem("Desfazer");
-		undo.addActionListener(this);
+		// undo.addActionListener(this);
 		restart = new JMenuItem("Reiniciar");
 		restart.addActionListener(this);
 
@@ -104,13 +106,18 @@ public class MainFrame extends JFrame implements ActionListener
 
 		barrInternoLabel.setBounds(first_width + 10, 20*registers.length + 30 + offsetY, 110, 20);
 		add(barrInternoLabel);
-		barrInterno.setBounds(first_width + 120, 20*registers.length + 30 + offsetY, 30, 20);
+		barrInterno.setBounds(first_width + 120, 20*registers.length + 30 + offsetY, 120, 20);
 		add(barrInterno);
 
 		barrExternoLabel.setBounds(first_width + 10, 20*registers.length + 60 + offsetY, 110, 20);
 		add(barrExternoLabel);
-		barrExterno.setBounds(first_width + 120, 20*registers.length + 60 + offsetY, 30, 20);
+		barrExterno.setBounds(first_width + 120, 20*registers.length + 60 + offsetY, 120, 20);
 		add(barrExterno);
+
+		busDoorLabel.setBounds(first_width + 10, 20*registers.length + 90 + offsetY, 50, 20);
+		add(busDoorLabel);
+		busDoor.setBounds(first_width + 40, 20*registers.length + 90 + offsetY, 200, 20);
+		add(busDoor);
 
 		add(menuBar);
         add(codeText);
@@ -175,18 +182,29 @@ public class MainFrame extends JFrame implements ActionListener
             default:
 		}
     }
-    
+
     private void Update()
     {
+        System.out.println("Mem addr: " + cpu.getMEM().anotherData + "\ndata: " + cpu.getMEM().data);
+
         int[] tempReg = cpu.getRegisters();
+
         for(int n = 0; n < registers.length; n++)
         {
-            registers[n].setText(Hexa.intToString(tempReg[n]));
+            int tes = tempReg[n];
+
+            if(registerLabels[n].getText() == "pc") tes /= 3;
+
+            //registers[n].setText(Hexa.intToString(tes));
+            registers[n].setText(""+tes);
         }
-        barrInterno.setText("" + cpu.barramentoInterno.data);
-        barrExterno.setText("" + cpu.barramentoExterno.data);
+        barrInterno.setText(Integer.toHexString(cpu.barramentoInterno.data));
+        barrExterno.setText(Integer.toHexString(cpu.barramentoExterno.data));
         currTime = cpu.UC.time;
         currLine = cpu.UC.code;
+        String temp = "";
+        for(boolean ch : cpu.UC.doors) temp += (ch) ? "1" : "0";
+        busDoor.setText(temp);
         flags.setText(cpu.UC.flagsToString());
         setTitle(currLine + " - Interpretador Assembly - T:" + currTime);
     }

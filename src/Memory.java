@@ -7,7 +7,7 @@ public class Memory extends Register{
     
     public TreeMap<Integer,String> map;
     
-    int anotherData;
+    public int anotherData;
     public int AVOrreadOrWrite;
 
     public Memory(int inDoor, int outDoor){
@@ -25,7 +25,10 @@ public class Memory extends Register{
     }
     */
 
-    public void setData(int data){ //MODIFICACAO: agora -> anotherData = endereco; super.data = dados.
+    public void setData(int door, int data){ //MODIFICACAO: agora -> anotherData = endereco; super.data = dados.
+        if(door == -1) return;
+        if(!doors[doorPos(door)]) return;
+        reset();
         if(AVOrreadOrWrite == 0) this.anotherData = data;
         else super.data = data;
         this.AVOrreadOrWrite = -1;
@@ -34,20 +37,20 @@ public class Memory extends Register{
     public void Update(){
         if(this.AVOrreadOrWrite == 1){
             readMemory();
-        }else{
-            if(this.AVOrreadOrWrite == 2){
-                writeMemory(super.data);
-            }
+            this.AVOrreadOrWrite = -1;
+            this.anotherData = -1;
+        }else if(this.AVOrreadOrWrite == 2){
+            writeMemory(super.data);
+            this.AVOrreadOrWrite = -1;
+            this.anotherData = -1;
         }
-        this.AVOrreadOrWrite = -1;
-        this.anotherData = -1;
     }
 
     void readMemory(){                        //retorna o que esta no endereco guardado pelo registrador da memoria
-        String tempData = this.map.get(this.anotherData);
+        String tempData = map.get(this.anotherData);
         if(tempData == null) tempData = "00";
         data = Hexa.strToInt(tempData);
-        super.open(18);
+        System.out.println("Reading from mem");
     }
 
     String writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes
@@ -60,7 +63,7 @@ public class Memory extends Register{
         return true;
     }
 
-    String pegaDireto(int endereco){
+    public String pegaDireto(int endereco){
         return this.map.get(endereco);
     }
     /*

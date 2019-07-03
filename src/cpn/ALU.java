@@ -38,8 +38,6 @@ public class ALU extends Register
     {
         if(calculation == -1) return;
 
-        System.out.println("Making the operation " + calculation + "on " + inData + " and " + data);
-
         switch(calculation)
         {
             case 0:
@@ -63,10 +61,8 @@ public class ALU extends Register
                 data = inData % data;
                 break;
             case 5:
-                data++;
+                data += 3;
                 break;
-            default:
-                return;
         }
 
         if(calculation < 5)

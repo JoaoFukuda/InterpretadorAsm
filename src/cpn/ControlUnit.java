@@ -11,18 +11,20 @@ public class ControlUnit {
     public int time = 0;
     public String code = "";
 
-    private boolean[] doors = new boolean[23];
+    public boolean[] doors = new boolean[23];
     private String fFlag, arFlag, jmpCond;
     private Bus internalBus, externalBus;
     private ALU alu;
     private Memory mem;
+    private Register pc;
 
     // The name of the file to open.
     String firmware = "firmware.txt";
 
-    public ControlUnit(ALU alu, Memory mem, Bus internal, Bus external) {
+    public ControlUnit(ALU alu, Memory mem, Bus internal, Bus external, Register pc) {
         this.alu = alu;
         this.mem = mem;
+        this.pc = pc;
         internalBus = internal;
         externalBus = external;
 
@@ -103,7 +105,9 @@ public class ControlUnit {
 
     public void updateIR(String opcode)
     {
-        switch(Integer.parseInt(opcode, 2))
+        System.out.println("Pegando OpCode " + opcode + " como " + Integer.parseInt(opcode, 16));
+
+        switch(Integer.parseInt(opcode, 16))
         {
             case 0:
                 CAR.data = 5;

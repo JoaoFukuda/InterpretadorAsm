@@ -46,7 +46,7 @@ public class CPU
         .Add(MBR, 17, 16)
         .Add(MEM, 19, 18);
 
-        UC = new ControlUnit(ULA, MEM, barramentoInterno, barramentoExterno);
+        UC = new ControlUnit(ULA, MEM, barramentoInterno, barramentoExterno, PC);
 
         IR.addUC(UC);
         ULA.addUC(UC);
@@ -72,6 +72,7 @@ public class CPU
         //Update the PC and CAR
 
         UC.Update();
+        MEM.Update();
         barramentoInterno.Update();
         barramentoExterno.Update();
         MEM.Update();

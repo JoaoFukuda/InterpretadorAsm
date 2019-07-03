@@ -9,6 +9,9 @@ import src.Memory;
 
 public class Compilator {
     private static Memory mem;
+    static int enderecoOpcode=0;
+    static int enderecoP1=1;
+    static int enderecoP2=2;
 
     static private String seeInsideAddress(String shell)
     {
@@ -23,9 +26,6 @@ public class Compilator {
     }
 
     static private String traduzIssu(String op , String p1, String p2){
-        int enderecoOpcode=0;
-        int enderecoP1=1;
-        int enderecoP2=2;
         
 
         /*Aparentemente p1 nunca serah uma constante*/
@@ -45,43 +45,45 @@ public class Compilator {
 
         if (p1.equalsIgnoreCase(ar)){
             regEndereco = true;
-            p1 = seeInsideAddress(p1);
+            p1 = "0";
             //kendy, guardar endereço 
         }
         else if (p1.equalsIgnoreCase(br)){
             regEndereco = true;
-            p1 = seeInsideAddress(p1);
+            p1 = "1";
             //kendy, guardar endereço
         }
         else if (p1.equalsIgnoreCase(cr)){
             regEndereco = true;
-            p1 = seeInsideAddress(p1);
+            p1 = "2";
             //kendy, guardar endereço
         }
         else if (p1.equalsIgnoreCase(dr)){
             regEndereco = true;
-            p1 = seeInsideAddress(p1);
+            p1 = "3";
             //kendy, guardar endereço
         }
         else if (p1.equalsIgnoreCase(a)){
             registrador = true;
+            p1 = "0";
         }
         else if (p1.equalsIgnoreCase(b)){
             registrador = true;
+            p1 = "1";
         }
         else if (p1.equalsIgnoreCase(c)){
             registrador = true;
+            p1 = "2";
         }
         else if (p1.equalsIgnoreCase(d)){
             registrador = true;
-        }
-        else if(Hexa.isHexa(p1)){
-            mem.adicionaDireto(enderecoP1, p1);
+            p1 = "3";
         }
         else{
             endereco = true;
-            mem.adicionaDireto(enderecoP1, seeInsideAddress(p1));
+            p1 = seeInsideAddress(p1);
         }
+        mem.adicionaDireto(enderecoP1, p1);
 
      /*________________________________________________________________ */
      
@@ -94,46 +96,50 @@ public class Compilator {
      
         if (p2.equalsIgnoreCase(ar)){
             regEndereco2 = true;
-            p2 = seeInsideAddress(p2);
+            p2 = "0";
         }
                 
         else if (p2.equalsIgnoreCase(br)){
             regEndereco2 = true;
-            p2 = seeInsideAddress(p2);
+            p2 = "1";
         }
                 
         else if (p2.equalsIgnoreCase(cr)){
             regEndereco2 = true;
-            p2 = seeInsideAddress(p2);
+            p2 = "2";
         }
                 
         else if (p2.equalsIgnoreCase(dr)){
             regEndereco2 = true;
-            p2 = seeInsideAddress(p2);
+            p2 = "3";
         }
         else if (p2.equalsIgnoreCase(a)){
             registrador2 = true;
+            p2 = "0";
         }
         
         else if (p2.equalsIgnoreCase(b)){
             registrador2 = true;
+            p2 = "1";
         }
         
         else if (p2.equalsIgnoreCase(c)){
             registrador2 = true;
+            p2 = "2";
         }
             
         else if (p2.equalsIgnoreCase(d)){
             registrador2 = true;
+            p2 = "3";
         }
         else if(Hexa.isHexa(p2)){
             constante2 = true;
-            mem.adicionaDireto(enderecoP2, p2);
         }
         else{
             endereco2 = true;
-            mem.adicionaDireto(enderecoP2, seeInsideAddress(p2));
+            p2 = seeInsideAddress(p2);
         }
+        mem.adicionaDireto(enderecoP2, p2);
     }
      /* ______________________________________________________________________________________*/
      //aqui seleciona o opcode
@@ -256,16 +262,17 @@ if (op.equalsIgnoreCase("CMP")){
                 opCode="010111";
             }
 
-            if(p1.equalsIgnoreCase(b)) opCode = "01" + opCode;
-            else if(p1.equalsIgnoreCase(c)) opCode = "10" + opCode;
-            else if(p1.equalsIgnoreCase(d)) opCode = "11" + opCode;
-            else opCode = "00" + opCode;
+            // if(p1.equalsIgnoreCase(b)) opCode = "01" + opCode;
+            // else if(p1.equalsIgnoreCase(c)) opCode = "10" + opCode;
+            // else if(p1.equalsIgnoreCase(d)) opCode = "11" + opCode;
+            // else opCode = "00" + opCode;
 
-            if(p2.equalsIgnoreCase(b)) opCode = "01" + opCode;
-            else if(p2.equalsIgnoreCase(c)) opCode = "10" + opCode;
-            else if(p2.equalsIgnoreCase(d)) opCode = "11" + opCode;
-            else opCode = "00" + opCode;
+            // if(p2.equalsIgnoreCase(b)) opCode = "01" + opCode;
+            // else if(p2.equalsIgnoreCase(c)) opCode = "10" + opCode;
+            // else if(p2.equalsIgnoreCase(d)) opCode = "11" + opCode;
+            // else opCode = "00" + opCode;
             
+            System.out.println("Colocando " + opCode + " como " + Hexa.binToString(opCode) + " em " + enderecoOpcode);
             mem.adicionaDireto(enderecoOpcode, Hexa.binToString(opCode));
 
             enderecoOpcode+=3;
