@@ -13,3 +13,12 @@ endif
 jar: all
 	jar cvf IntAsm.jar *
 	java -cp IntAsm.jar src.Main
+
+pull:
+	git fetch
+	git pull
+
+push:
+	git add .
+	git commit
+	git push
