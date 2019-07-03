@@ -29,6 +29,10 @@ public class MainFrame extends JFrame implements ActionListener
 	JTextArea codeText;
 	JTextField flags = new JTextField();
 	JLabel flagLabel = new JLabel("flags (ez/s/err)");
+	JTextField barrInterno = new JTextField();
+	JLabel barrInternoLabel = new JLabel("Barramento Interno");
+	JTextField barrExterno = new JTextField();
+	JLabel barrExternoLabel = new JLabel("Barramento Externo");
 	JTextField[] registers = new JTextField[10];
 	JLabel[] registerLabels = {
 		new JLabel("ax"),
@@ -97,6 +101,16 @@ public class MainFrame extends JFrame implements ActionListener
 		add(flagLabel);
 		flags.setBounds(first_width + 110, 20*registers.length + offsetY, 30, 20);
 		add(flags);
+
+		barrInternoLabel.setBounds(first_width + 10, 20*registers.length + 30 + offsetY, 110, 20);
+		add(barrInternoLabel);
+		barrInterno.setBounds(first_width + 120, 20*registers.length + 30 + offsetY, 30, 20);
+		add(barrInterno);
+
+		barrExternoLabel.setBounds(first_width + 10, 20*registers.length + 60 + offsetY, 110, 20);
+		add(barrExternoLabel);
+		barrExterno.setBounds(first_width + 120, 20*registers.length + 60 + offsetY, 30, 20);
+		add(barrExterno);
 
 		add(menuBar);
         add(codeText);
@@ -169,6 +183,8 @@ public class MainFrame extends JFrame implements ActionListener
         {
             registers[n].setText(Hexa.intToString(tempReg[n]));
         }
+        barrInterno.setText("" + cpu.barramentoInterno.data);
+        barrExterno.setText("" + cpu.barramentoExterno.data);
         currTime = cpu.UC.time;
         currLine = cpu.UC.code;
         flags.setText(cpu.UC.flagsToString());

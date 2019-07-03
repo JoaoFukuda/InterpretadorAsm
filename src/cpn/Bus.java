@@ -5,7 +5,8 @@ public class Bus
     Register[] registers;
     int[] inDoors, outDoors;
     boolean hasData;
-    int data, nOfRegisters, end = 0;
+    public int data;
+    int nOfRegisters, end = 0;
 
     public enum Dir{
         IN,
@@ -34,8 +35,6 @@ public class Bus
         {
             registers[n].setData(inDoors[n], data);
         }
-
-        data = -1;
     }
 
     public Bus Add(Register reg, int inDoor, int outDoor)

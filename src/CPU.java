@@ -6,7 +6,7 @@ public class CPU
 {
     Memory MEM;
 
-    private Bus barramentoInterno, barramentoExterno;
+    public Bus barramentoInterno, barramentoExterno;
     public ControlUnit UC;
     public ALU ULA;
     public MAR MAR;

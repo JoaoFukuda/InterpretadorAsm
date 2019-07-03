@@ -103,84 +103,84 @@ public class ControlUnit {
 
     public void updateIR(String opcode)
     {
-        switch(opcode)
+        switch(Integer.parseInt(opcode, 2))
         {
-            case "00000000":
+            case 0:
                 CAR.data = 5;
                 break;
-            case "00000001":
+            case 1:
                 CAR.data = 6;
                 break;
-            case "00000010":
+            case 2:
                 CAR.data = 9;
                 break;
-            case "00000100":
+            case 4:
                 CAR.data = 12;
                 break;
-            case "00000101":
+            case 5:
                 CAR.data = 15;
                 break;
-            case "00000110":
+            case 6:
                 CAR.data = 19;
                 break;
-            case "00000111":
+            case 7:
                 CAR.data = 23;
                 break;
-            case "00001000":
+            case 8:
                 CAR.data = 26;
                 break;
-            case "00001001":
+            case 9:
                 CAR.data = 29;
                 break;
-            case "00001010":
+            case 10:
                 CAR.data = 32;
                 break;
-            case "00001011":
+            case 11:
                 CAR.data = 35;
                 break;
-            case "00001100":
+            case 12:
                 CAR.data = 38;
                 break;
-            case "00001101":
+            case 13:
                 CAR.data = 41;
                 break;
-            case "00001110":
+            case 14:
                 CAR.data = 44;
                 break;
-            case "00001111":
+            case 15:
                 CAR.data = 47;
                 break;
-            case "00010000":
+            case 16:
                 CAR.data = 50;
                 break;
-            case "00010001":
+            case 17:
                 CAR.data = 53;
                 break;
-            case "00010010":
+            case 18:
                 CAR.data = 54;
                 break;
-            case "00010011":
+            case 19:
                 CAR.data = 56;
                 break;
-            case "00010100":
+            case 20:
                 CAR.data = 58;
                 break;
-            case "00010101":
+            case 21:
                 CAR.data = 60;
                 break;
-            case "00010110":
+            case 22:
                 CAR.data = 62;
                 break;
-            case "00010111":
+            case 23:
                 CAR.data = 64;
                 break;
-            case "00011000":
+            case 24:
                 CAR.data = 66;
                 break;
-            case "00011001":
+            case 25:
                 CAR.data = 68;
                 break;
-            case "00011010":
+            case 26:
                 CAR.data = 69;
                 break;
         }

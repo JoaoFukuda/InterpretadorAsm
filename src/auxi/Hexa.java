@@ -6,50 +6,34 @@ public class Hexa {
 
     public static boolean isHexa(String hexa)
     {
-        boolean res = true;
-
-        if(hexa.length() != 2) res = false;
-        else
+        try
         {
-            res = false;
-            for(int i = 0; i < 2; i++)
-            {
-                for(char c : hexachar)
-                {
-                    if(hexa.charAt(i) == c) res = true;
-                    continue;
-                }
-                if(!res) break;
-            }
+            Integer.parseInt(hexa, 16);
+        } catch(java.lang.NumberFormatException ex)
+        {
+            return false;
         }
 
-        return res;
+        return true;
     }
 
     public static int strToInt(String hexa) {
-        int res = 0;
-
-        for(int i = 0; i < 2; i++)
-            for(int n = 0; n < hexachar.length; n++)
-            {
-                if(hexa.charAt(i) != hexachar[n]) continue;
-                res += n * (16 * (1 - i));
-            }
-
-        return res;
+        return Integer.parseInt(hexa, 16);
     }
 
     public static String intToString(int hexa) {
-        return hexachar[hexa/16] + "" + hexachar[hexa%16];
+        return Integer.toHexString(hexa);
     }
 
-    public static String binToString(String bin)
+    public static String binToString(String hexa)
     {
-        return "00";
+        int i = Integer.parseInt(hexa, 2);
+        return Integer.toHexString(i);
     }
-
-    public static String strToBin(String Hexa)
+    
+    public static String strToBin(String hex)
     {
-        return "00";
+        int i = Integer.parseInt(hex, 16);
+        return Integer.toBinaryString(i);
     }
 }
