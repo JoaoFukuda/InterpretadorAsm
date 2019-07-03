@@ -170,9 +170,9 @@ public class MainFrame extends JFrame implements ActionListener
             registers[n].setText(Hexa.intToString(tempReg[n]));
         }
         currTime = cpu.UC.time;
-        currLine = cpu.getMEM().map.get(cpu.PC.data);
+        currLine = cpu.UC.code;
         flags.setText(cpu.UC.flagsToString());
-        setTitle(currLine + " - Interpretador Assembly - " + currTime);
+        setTitle(currLine + " - Interpretador Assembly - T:" + currTime);
     }
 
 	public MainFrame() {

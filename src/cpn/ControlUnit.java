@@ -9,6 +9,7 @@ public class ControlUnit {
     public boolean[] aFlags;
     public Register CAR, CBR;
     public int time = 0;
+    public String code = "";
 
     private boolean[] doors = new boolean[23];
     private String fFlag, arFlag, jmpCond;
@@ -100,12 +101,97 @@ public class ControlUnit {
         return;
     }
 
+    public void updateIR(String opcode)
+    {
+        switch(opcode)
+        {
+            case "00000000":
+                CAR.data = 5;
+                break;
+            case "00000001":
+                CAR.data = 6;
+                break;
+            case "00000010":
+                CAR.data = 9;
+                break;
+            case "00000100":
+                CAR.data = 12;
+                break;
+            case "00000101":
+                CAR.data = 15;
+                break;
+            case "00000110":
+                CAR.data = 19;
+                break;
+            case "00000111":
+                CAR.data = 23;
+                break;
+            case "00001000":
+                CAR.data = 26;
+                break;
+            case "00001001":
+                CAR.data = 29;
+                break;
+            case "00001010":
+                CAR.data = 32;
+                break;
+            case "00001011":
+                CAR.data = 35;
+                break;
+            case "00001100":
+                CAR.data = 38;
+                break;
+            case "00001101":
+                CAR.data = 41;
+                break;
+            case "00001110":
+                CAR.data = 44;
+                break;
+            case "00001111":
+                CAR.data = 47;
+                break;
+            case "00010000":
+                CAR.data = 50;
+                break;
+            case "00010001":
+                CAR.data = 53;
+                break;
+            case "00010010":
+                CAR.data = 54;
+                break;
+            case "00010011":
+                CAR.data = 56;
+                break;
+            case "00010100":
+                CAR.data = 58;
+                break;
+            case "00010101":
+                CAR.data = 60;
+                break;
+            case "00010110":
+                CAR.data = 62;
+                break;
+            case "00010111":
+                CAR.data = 64;
+                break;
+            case "00011000":
+                CAR.data = 66;
+                break;
+            case "00011001":
+                CAR.data = 68;
+                break;
+            case "00011010":
+                CAR.data = 69;
+                break;
+        }
+    }
+
     public void Update()
     {
         time++;
         
         getLine(CAR.data);
-        
+
         CAR.data++;
 
         switch(fFlag)

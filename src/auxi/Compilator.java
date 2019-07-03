@@ -32,7 +32,6 @@ public class Compilator {
         boolean endereco = false; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
         boolean registrador = false;
         boolean regEndereco = false; // verifica se eh registrador de endereco
-        boolean constante = false;
         /* Kendy, se esse endereço tem que guardar tem que ter um jeito de saber
         qual que é o número, eu não sei direito  */
         String ar= "[AX]";
@@ -46,18 +45,22 @@ public class Compilator {
 
         if (p1.equalsIgnoreCase(ar)){
             regEndereco = true;
+            p1 = seeInsideAddress(p1);
             //kendy, guardar endereço 
         }
         else if (p1.equalsIgnoreCase(br)){
             regEndereco = true;
+            p1 = seeInsideAddress(p1);
             //kendy, guardar endereço
         }
         else if (p1.equalsIgnoreCase(cr)){
             regEndereco = true;
+            p1 = seeInsideAddress(p1);
             //kendy, guardar endereço
         }
         else if (p1.equalsIgnoreCase(dr)){
             regEndereco = true;
+            p1 = seeInsideAddress(p1);
             //kendy, guardar endereço
         }
         else if (p1.equalsIgnoreCase(a)){
@@ -73,16 +76,13 @@ public class Compilator {
             registrador = true;
         }
         else if(Hexa.isHexa(p1)){
-            constante = true;
-            int endP1 = Hexa.strToInt(p1);
-            mem.adicionaDireto(enderecoP1, endP1);
+            mem.adicionaDireto(enderecoP1, p1);
         }
         else{
             endereco = true;
-            int endP1 = Hexa.strToInt(seeInsideAddress(p1));
-            mem.adicionaDireto(enderecoP1, endP1);
+            mem.adicionaDireto(enderecoP1, seeInsideAddress(p1));
         }
-            
+
      /*________________________________________________________________ */
      
      boolean regEndereco2 = false; // verifica se eh endereco de registrador
@@ -94,18 +94,22 @@ public class Compilator {
      
         if (p2.equalsIgnoreCase(ar)){
             regEndereco2 = true;
+            p2 = seeInsideAddress(p2);
         }
                 
         else if (p2.equalsIgnoreCase(br)){
             regEndereco2 = true;
+            p2 = seeInsideAddress(p2);
         }
                 
         else if (p2.equalsIgnoreCase(cr)){
             regEndereco2 = true;
+            p2 = seeInsideAddress(p2);
         }
                 
         else if (p2.equalsIgnoreCase(dr)){
             regEndereco2 = true;
+            p2 = seeInsideAddress(p2);
         }
         else if (p2.equalsIgnoreCase(a)){
             registrador2 = true;
@@ -124,13 +128,11 @@ public class Compilator {
         }
         else if(Hexa.isHexa(p2)){
             constante2 = true;
-            int endP2 = Hexa.strToInt(p2);
-            mem.adicionaDireto(enderecoP2, endP2);
+            mem.adicionaDireto(enderecoP2, p2);
         }
         else{
             endereco2 = true;
-            int endP2 = Hexa.strToInt(seeInsideAddress(p2));
-            mem.adicionaDireto(enderecoP2, endP2);
+            mem.adicionaDireto(enderecoP2, seeInsideAddress(p2));
         }
     }
      /* ______________________________________________________________________________________*/
@@ -253,12 +255,22 @@ if (op.equalsIgnoreCase("CMP")){
             if (op.equalsIgnoreCase(jle)){
                 opCode="010111";
             }
-            int opcodee = Integer.parseInt(opCode);
-            mem.adicionaDireto(enderecoOpcode,opcodee);
+
+            if(p1.equalsIgnoreCase(b)) opCode = "01" + opCode;
+            else if(p1.equalsIgnoreCase(c)) opCode = "10" + opCode;
+            else if(p1.equalsIgnoreCase(d)) opCode = "11" + opCode;
+            else opCode = "00" + opCode;
+
+            if(p2.equalsIgnoreCase(b)) opCode = "01" + opCode;
+            else if(p2.equalsIgnoreCase(c)) opCode = "10" + opCode;
+            else if(p2.equalsIgnoreCase(d)) opCode = "11" + opCode;
+            else opCode = "00" + opCode;
+            
+            mem.adicionaDireto(enderecoOpcode, Hexa.binToString(opCode));
+
             enderecoOpcode+=3;
             enderecoP1+=3;
             enderecoP2+=3;
-            
 
             return opCode;
             }

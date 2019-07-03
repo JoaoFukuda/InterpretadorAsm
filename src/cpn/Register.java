@@ -50,7 +50,6 @@ public class Register{
         int pos;
         if((pos = doorPos(door)) == -1) return;
         doors[pos] = true;
-        System.out.println("Opening door " + door);
     }
 
     protected void reset()

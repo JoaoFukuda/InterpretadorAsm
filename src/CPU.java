@@ -11,7 +11,8 @@ public class CPU
     public ALU ULA;
     public MAR MAR;
     public MBR MBR;
-    public Register AX, BX, CX, DX, IR, PC;
+    public IR IR;
+    public Register AX, BX, CX, DX, PC;
 
     public CPU()
     {
@@ -19,8 +20,8 @@ public class CPU
         BX = new Register(9, 8);
         CX = new Register(7, 6);
         DX = new Register(5, 4);
-        IR = new Register(3, 2);
         PC = new Register(1, 0);
+        IR = new IR(3, 2);
         ULA = new ALU(20, 21, 22);
         MAR = new MAR(12, 13);
         MBR = new MBR(14, 15, 17, 16);
@@ -46,6 +47,9 @@ public class CPU
         .Add(MEM, 19, 18);
 
         UC = new ControlUnit(ULA, MEM, barramentoInterno, barramentoExterno);
+
+        IR.addUC(UC);
+        ULA.addUC(UC);
     }
     
     // Run the program with the steps informed by the GUI

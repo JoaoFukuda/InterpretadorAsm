@@ -54,9 +54,9 @@ public class Memory extends Register{
         return this.map.put(this.anotherData,Hexa.intToString(data));
     }
 
-    public boolean adicionaDireto(int endereco, int dados){ //Adiciona coisas na memoria diretamente, falha se já tiver coisa no endereco
+    public boolean adicionaDireto(int endereco, String dados){ //Adiciona coisas na memoria diretamente, falha se já tiver coisa no endereco
         if(this.map.containsKey(endereco)) return false;
-        this.map.put(endereco,Hexa.intToString(dados));
+        this.map.put(endereco,(dados));
         return true;
     }
 

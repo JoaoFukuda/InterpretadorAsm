@@ -45,12 +45,11 @@ public class Hexa {
 
     public static String binToString(String bin)
     {
-        return "";
+        return "00";
     }
 
     public static String strToBin(String Hexa)
     {
-        return "";
+        return "00";
     }
 }
-

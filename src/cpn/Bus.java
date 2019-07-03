@@ -30,8 +30,6 @@ public class Bus
             break;
         }
 
-        System.out.println(data + " is on the bus");
-
         if(hasData) for(int n = 0; n < nOfRegisters; n++)
         {
             registers[n].setData(inDoors[n], data);
