@@ -3,7 +3,6 @@ package src.grafico;
 
 import src.CPU;
 import src.auxi.Compilator;
-import src.auxi.Hexa;
 
 import java.util.Scanner;
 import java.awt.event.*;
