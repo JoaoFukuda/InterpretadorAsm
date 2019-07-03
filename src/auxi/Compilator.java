@@ -26,10 +26,6 @@ public class Compilator {
     }
 
     static private String traduzIssu(String op , String p1, String p2){
-
-        System.out.println(op + " " + p1 + " " + p2);
-        
-
         /*Aparentemente p1 nunca serah uma constante*/
         boolean endereco = false; // eu poderia assumir que endereco eh registrador= false; mas acho que assim fica menos confuso
         boolean registrador = false;
@@ -276,7 +272,6 @@ if (op.equalsIgnoreCase("CMP")){
             // else if(p2.equalsIgnoreCase(d)) opCode = "11" + opCode;
             // else opCode = "00" + opCode;
             
-            System.out.println("Colocando " + opCode + " como " + Hexa.binToString(opCode) + " em " + enderecoOpcode);
             mem.adicionaDireto(enderecoOpcode, Hexa.binToString(opCode));
 
             enderecoOpcode+=3;
@@ -323,7 +318,7 @@ if (op.equalsIgnoreCase("CMP")){
             }
         }
         
-        System.out.println(traduzIssu(operacao,p1,p2));
+        traduzIssu(operacao,p1,p2);
     }
 
     static public void compilar(InputStream input, Memory mem)

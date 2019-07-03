@@ -67,8 +67,8 @@ public class ALU extends Register
 
         if(calculation < 5)
         {
-            uc.aFlags[1] = data - inData >= 0;
-            uc.aFlags[0] = data == inData;
+            uc.aFlags[1] = data >= 0;
+            uc.aFlags[0] = data == 0;
         }
 
         calculation = -1;

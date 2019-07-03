@@ -4,6 +4,7 @@ import src.cpn.Register;
 import src.auxi.Hexa;
 
 public class Memory extends Register{
+    private static final int MEM_OFFSET = 100;
     
     public TreeMap<Integer,String> map;
     
@@ -50,11 +51,10 @@ public class Memory extends Register{
         String tempData = map.get(this.anotherData);
         if(tempData == null) tempData = "00";
         data = Hexa.strToInt(tempData);
-        System.out.println("Reading from mem");
     }
 
     String writeMemory(int data){              //escreve no endereco armazenado no registrador da memoria e retorna o que estava antes
-        return this.map.put(this.anotherData,Hexa.intToString(data));
+        return this.map.put(this.anotherData,Hexa.intToString(data) + MEM_OFFSET);
     }
 
     public boolean adicionaDireto(int endereco, String dados){ //Adiciona coisas na memoria diretamente, falha se já tiver coisa no endereco

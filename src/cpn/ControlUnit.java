@@ -112,8 +112,6 @@ public class ControlUnit {
 
     public void updateIR(String opcode)
     {
-        System.out.println("Pegando OpCode " + opcode + " como " + Integer.parseInt(opcode, 16));
-
         switch(Integer.parseInt(opcode, 16))
         {
             case 0:
@@ -288,7 +286,6 @@ public class ControlUnit {
                 mem.AVOrreadOrWrite = 2;
                 break;
             default:
-                System.out.println("fFlags:" + fFlag);
         }
 
         switch(arFlag)
@@ -311,7 +308,6 @@ public class ControlUnit {
             case "101":
                 alu.calculation = 5;
             default:
-                System.out.println("arFlags:" + arFlag);
         }
 
         boolean jmp = false;
